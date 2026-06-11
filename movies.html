@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Movies - Stackly</title>
+  <meta name="description" content="Browse 10,000+ movies on Stackly. Action, Drama, Comedy, Thriller — stream in HD &amp; 4K with no ads."/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="mainNav">
+  <div class="nav-logo">
+    <a href="index.html" class="logo-btn"><img src="assets/img/stackly_logo.webp" class="logo-img" alt="Logo"></a>
+    <span class="nav-tagline">Stream Everything</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="movies.html" class="active">Movies</a></li>
+    <li><a href="series.html">Series</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-search">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    <input type="text" id="navSearchMovies" placeholder="Search movies..."/>
+  </div>
+  <div class="nav-actions">
+    <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+    <a href="login.html" class="btn btn-primary btn-sm">Subscribe</a>
+    <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="index.html">Home</a><a href="movies.html">Movies</a><a href="series.html">Series</a>
+  <a href="about.html">About</a><a href="contact.html">Contact</a>
+  <a href="login.html" class="btn btn-primary">Subscribe Now</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero has-bg" id="moviesHero" style="background-image: url('assets/img/6.webp');">
+  <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Movies</span></div>
+    <h1 data-aos="fade-up">Explore <span class="gradient-text">Movies</span></h1>
+    <p data-aos="fade-up" data-aos-delay="100" style="max-width:580px;">Over 10,000 movies across every genre. Stream instantly in HD &amp; 4K with no ads, no interruptions. From timeless classics to the latest blockbusters — it's all here.</p>
+    <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;" data-aos="fade-up" data-aos-delay="200">
+      <span class="badge badge-primary">10,000+ Movies</span>
+      <span class="badge badge-accent">4K Available</span>
+      <span class="badge badge-gold">New Every Week</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,auto);gap:32px;margin-top:40px;flex-wrap:wrap;" data-aos="fade-up" data-aos-delay="300">
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <span style="font-size:1.6rem;font-weight:900;color:#fff;">10K+</span>
+        <span style="font-size:0.78rem;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.08em;">Movies</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <span style="font-size:1.6rem;font-weight:900;color:#fff;">40+</span>
+        <span style="font-size:0.78rem;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.08em;">Genres</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <span style="font-size:1.6rem;font-weight:900;color:#fff;">4K</span>
+        <span style="font-size:0.78rem;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.08em;">Ultra HD</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <span style="font-size:1.6rem;font-weight:900;color:#fff;">Zero</span>
+        <span style="font-size:0.78rem;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.08em;">Ads Ever</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<section style="background:var(--clr-bg2);padding:32px 0;border-bottom:1px solid var(--clr-border);" id="filterSection">
+  <div class="container">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <div class="tabs" style="flex:1;margin-bottom:0;">
+        <button class="tab-btn active" id="tabAll" data-filter="all">All</button>
+        <button class="tab-btn" id="tabAction" data-filter="action">💥 Action</button>
+        <button class="tab-btn" id="tabDrama" data-filter="drama">🎭 Drama</button>
+        <button class="tab-btn" id="tabComedy" data-filter="comedy">😂 Comedy</button>
+        <button class="tab-btn" id="tabThriller" data-filter="thriller">🔍 Thriller</button>
+        <button class="tab-btn" id="tabRomance" data-filter="romance">💕 Romance</button>
+        <button class="tab-btn" id="tabScifi" data-filter="scifi">🚀 Sci-Fi</button>
+      </div>
+      <select class="filter-select" id="yearFilter" aria-label="Filter by year">
+        <option>Year</option><option>2024</option><option>2023</option><option>2022</option><option>2021</option>
+      </select>
+      <select class="filter-select" id="sortFilter" aria-label="Sort movies">
+        <option>Sort By</option><option>Newest</option><option>Top Rated</option><option>Most Watched</option>
+      </select>
+    </div>
+  </div>
+</section>
+
+<!-- MOVIES GRID -->
+<section class="section" id="moviesGrid">
+  <div class="container">
+    <div class="content-row-header" data-aos="fade-up">
+      <h3><span class="icon">🎬</span> All Movies</h3>
+      <span style="color:var(--clr-text-muted);">Showing 10 of 10,240 results</span>
+    </div>
+    <div class="content-grid" data-aos="fade-up" data-aos-delay="100">
+      <!-- 10 cards -->
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/18.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-accent">HD</span></div><span class="rating">⭐ 8.9</span><div class="overlay"><h4>Neon City Blues</h4><p>Crime · 2024</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets/img/19.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">NEW</span></div><span class="rating">⭐ 7.8</span><div class="overlay"><h4>The Mirror Effect</h4><p>Sci-Fi · 2024</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/20.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-gold">4K</span></div><span class="rating">⭐ 9.2</span><div class="overlay"><h4>Starfall Chronicles</h4><p>Adventure · 2024</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/21.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-accent">HD</span></div><span class="rating">⭐ 8.1</span><div class="overlay"><h4>Shadow Protocol</h4><p>Action · 2023</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/22.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-primary">NEW</span></div><span class="rating">⭐ 8.5</span><div class="overlay"><h4>Velvet Noir</h4><p>Mystery · 2024</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/23.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-accent">HD</span></div><span class="rating">⭐ 8.7</span><div class="overlay"><h4>Desert Storm</h4><p>Action · 2024</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/24.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">NEW</span></div><span class="rating">⭐ 9.0</span><div class="overlay"><h4>Midnight Requiem</h4><p>Thriller · 2024</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/25.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-primary">4K</span></div><span class="rating">⭐ 8.3</span><div class="overlay"><h4>Purple Haze</h4><p>Romance · 2024</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/26.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-accent">HD</span></div><span class="rating">⭐ 7.9</span><div class="overlay"><h4>Forest of Lies</h4><p>Comedy · 2023</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+    </div>
+    <div style="text-align:center;margin-top:40px;" data-aos="fade-up">
+      <button class="btn btn-outline btn-lg" id="loadMoreMovies">Load More Movies</button>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED BANNER -->
+<section style="background:var(--clr-bg2);padding:80px 0;" id="featuredMovieSection">
+  <div class="container">
+    <div class="content-row-header" data-aos="fade-up">
+      <h3><span class="icon">🏆</span> Editor's Pick</h3>
+    </div>
+    <div class="featured-banner" data-aos="zoom-in" style="background:url('assets//img/27.webp') center/cover;">
+      <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);z-index:1;"></div>
+      <div class="content" data-aos="fade-right" data-aos-delay="100" style="position:relative;z-index:2;">
+        <span class="badge badge-gold" style="margin-bottom:16px;">🏆 EDITOR'S PICK · 4K</span>
+        <h3 style="margin-bottom:16px;">Echoes of the Dark Universe</h3>
+        <div style="display:flex;gap:12px;margin:12px 0;flex-wrap:wrap;">
+          <span style="color:var(--clr-text-muted);">2024</span>
+          <span style="color:var(--clr-text-muted);">Sci-Fi · Thriller</span>
+          <span style="color:var(--clr-text-muted);">2h 18m</span>
+          <span style="color:var(--clr-accent2);">⭐ 8.7</span>
+        </div>
+        <p style="max-width:420px;">A mind-bending journey across parallel dimensions where one scientist must choose between saving her world or destroying another. Winner of 4 international awards.</p>
+        <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;">
+          <a href="login.html" class="btn btn-primary">▶ Watch in 4K</a>
+          <button class="btn btn-outline" id="editorPickInfo">ℹ More Info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOP RATED ROW -->
+<section class="section" id="topRatedSection">
+  <div class="container">
+    <div class="content-row-header" data-aos="fade-up">
+      <h3><span class="icon">⭐</span> Top Rated</h3>
+      <a href="#" class="see-all">See All →</a>
+    </div>
+    <div class="scroll-row" data-aos="fade-up" data-aos-delay="100">
+      <div class="content-card" style="flex:0 0 180px;"><div class="thumb" style="background:url('assets//img/28.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-gold">9.4</span></div><span class="rating">⭐ 9.4</span><div class="overlay"><h4>Cosmos Reborn</h4><p>Sci-Fi</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card" style="flex:0 0 180px;"><div class="thumb" style="background:url('assets//img/29.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-gold">9.2</span></div><span class="rating">⭐ 9.2</span><div class="overlay"><h4>Starfall</h4><p>Adventure</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card" style="flex:0 0 180px;"><div class="thumb" style="background:url('assets//img/30.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-gold">9.1</span></div><span class="rating">⭐ 9.1</span><div class="overlay"><h4>Firestorm</h4><p>Action</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card" style="flex:0 0 180px;"><div class="thumb" style="background:url('assets//img/31.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-gold">9.0</span></div><span class="rating">⭐ 9.0</span><div class="overlay"><h4>Midnight</h4><p>Thriller</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card" style="flex:0 0 180px;"><div class="thumb" style="background:url('assets//img/32.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-gold">8.9</span></div><span class="rating">⭐ 8.9</span><div class="overlay"><h4>Neon City</h4><p>Crime</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card" style="flex:0 0 180px;"><div class="thumb" style="background:url('assets//img/33.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-gold">8.8</span></div><span class="rating">⭐ 8.8</span><div class="overlay"><h4>Velvet Dark</h4><p>Mystery</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card" style="flex:0 0 180px;"><div class="thumb" style="background:url('assets//img/34.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-gold">8.7</span></div><span class="rating">⭐ 8.7</span><div class="overlay"><h4>Echoes</h4><p>Sci-Fi</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card" style="flex:0 0 180px;"><div class="thumb" style="background:url('assets//img/35.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-gold">8.6</span></div><span class="rating">⭐ 8.6</span><div class="overlay"><h4>Desert Wind</h4><p>Action</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NEW RELEASES -->
+<section style="background:var(--clr-bg2);padding:80px 0;" id="newReleasesSection">
+  <div class="container">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2>Just <span class="gradient-text">Released</span></h2>
+      <p>The freshest titles added this week</p>
+      <div class="section-line"></div>
+    </div>
+    <div class="content-grid" data-aos="fade-up" data-aos-delay="100">
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/36.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">TODAY</span></div><span class="rating">⭐ 8.2</span><div class="overlay"><h4>Zero Hour</h4><p>Thriller · 2024</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/37.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">NEW</span></div><span class="rating">⭐ 7.5</span><div class="overlay"><h4>Cobalt Dreams</h4><p>Romance · 2024</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/38.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">NEW</span></div><span class="rating">⭐ 8.8</span><div class="overlay"><h4>The Emerald Key</h4><p>Mystery · 2024</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/39.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">NEW</span></div><span class="rating">⭐ 9.1</span><div class="overlay"><h4>Crimson Sky</h4><p>Action · 2024</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/40.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">NEW</span></div><span class="rating">⭐ 7.7</span><div class="overlay"><h4>Electric Blue</h4><p>Comedy · 2024</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="section" id="moviesNewsletter">
+  <div class="container">
+    <div class="newsletter" data-aos="zoom-in">
+      <div class="newsletter-content">
+        <span class="badge badge-primary" style="margin-bottom:16px;">🎬 NEVER MISS A RELEASE</span>
+        <h2>Get <span class="gradient-text">Movie Alerts</span></h2>
+        <p>Be the first to know about new releases, premieres and exclusive Stackly Originals.</p>
+        <form id="moviesNewsletterForm" class="newsletter-form" novalidate>
+          <input type="email" id="moviesNewsletterEmail" name="email" placeholder="Enter your email" data-validate="required|email" class="form-control" style="border-radius:40px;"/>
+          <span class="form-error" id="moviesNewsletterEmailError"></span>
+          <button type="button" class="btn btn-primary" id="moviesNewsletterBtn" onclick="window.location.href='404.html'">Notify Me</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand" data-aos="fade-up">
+        <a href="index.html" class="logo-btn"><img src="assets/img/stackly_logo.webp" class="logo-img" alt="Logo"></a>
+        <p>Your ultimate entertainment destination. Stream 10,000+ movies in HD &amp; 4K with no ads.</p>
+        <div class="footer-socials">
+          <a href="404.html" class="social-btn" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a><a href="404.html" class="social-btn" aria-label="Twitter / X"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.261 5.636 5.903-5.636zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="404.html" class="social-btn" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a><a href="404.html" class="social-btn" aria-label="YouTube"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col" data-aos="fade-up" data-aos-delay="100">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="index.html">Home</a></li><li><a href="movies.html">Movies</a></li>
+          <li><a href="series.html">Series</a></li><li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col" data-aos="fade-up" data-aos-delay="200">
+        <h5>Genres</h5>
+        <ul>
+          <li><a href="404.html">Action</a></li><li><a href="404.html">Drama</a></li>
+          <li><a href="404.html">Comedy</a></li><li><a href="404.html">Thriller</a></li>
+          <li><a href="404.html">Sci-Fi</a></li>
+        </ul>
+      </div>
+      <div class="footer-col" data-aos="fade-up" data-aos-delay="300">
+        <h5>Download App</h5>
+        <div class="footer-apps">
+          <a href="404.html" class="app-badge"><span style=>🍎</span><div class="app-text"><small>Download on the</small><span>App Store</span></div></a>
+          <a href="404.html" class="app-badge"><span style=>🤖</span><div class="app-text"><small>Get it on</small><span>Google Play</span></div></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Stackly. All rights reserved.</p>
+      <div class="footer-links"><a href="404.html">Privacy</a><a href="404.html">Terms</a><a href="404.html">Sitemap</a></div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop">↑</button>
+<div class="toast-container" id="toastContainer"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="assets/js/validation.js"></script>
+<script src="assets/js/script.js"></script>
+<script>
+  // Filter tabs
+  document.querySelectorAll('[data-filter]').forEach(btn=>{
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('[data-filter]').forEach(b=>b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+  // Load more
+  const loadMore=document.getElementById('loadMoreMovies');
+  if(loadMore){loadMore.addEventListener('click',function(){showToast('Loading more movies...','info');});}
+</script>
+</body>
+</html>

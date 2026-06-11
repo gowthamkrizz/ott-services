@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - Stackly</title>
+  <meta name="description" content="Get in touch with Stackly support. We're here to help with billing, technical issues, content requests and more."/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <style>
+    .social-connect-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+    @media(max-width:768px){.social-connect-grid{grid-template-columns:repeat(2,1fr);}}
+    .social-card{background:var(--clr-card);border:1px solid var(--clr-border);border-radius:var(--radius-md);padding:32px 20px;text-align:center;transition:var(--transition);cursor:pointer;}
+    .social-card:hover{transform:translateY(-6px);border-color:var(--clr-primary);box-shadow:var(--shadow-glow);}
+    .social-card .s-icon{margin-bottom:12px;}
+    .social-card h4{margin-bottom:4px;}
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="mainNav">
+  <div class="nav-logo">
+    <a href="index.html" class="logo-btn"><img src="./assets/img/stackly_logo.webp" class="logo-img" alt="Logo"></a>
+    <span class="nav-tagline">Stream Everything</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="movies.html">Movies</a></li>
+    <li><a href="series.html">Series</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <div class="nav-search">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    <input type="text" id="navSearchContact" placeholder="Search..."/>
+  </div>
+  <div class="nav-actions">
+    <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+    <a href="login.html" class="btn btn-primary btn-sm">Subscribe</a>
+    <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="index.html">Home</a><a href="movies.html">Movies</a><a href="series.html">Series</a>
+  <a href="about.html">About</a><a href="contact.html">Contact</a>
+  <a href="login.html" class="btn btn-primary">Subscribe Now</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero has-bg" id="contactHero" style="background-image: url('assets/img/5.webp'); min-height: 520px;">
+  <div class="orb orb-1"></div><div class="orb orb-2"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Contact</span></div>
+    <span class="badge badge-primary" style="margin-bottom:20px;display:inline-block;" data-aos="fade-up">📬 REACH OUT</span>
+    <h1 data-aos="fade-up">Get In <span class="gradient-text">Touch</span></h1>
+    <p data-aos="fade-up" data-aos-delay="100" style="max-width:580px;">We're here to help — every day. Whether it's billing, technical support, content requests or just a hello, our team responds within 2–4 hours during business hours.</p>
+    <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;" data-aos="fade-up" data-aos-delay="200">
+      <span class="badge badge-primary">24/7 Support</span>
+      <span class="badge badge-accent">2–4 hr Response</span>
+      <span class="badge badge-gold">Live Chat Available</span>
+    </div>
+    <div style="display:flex;gap:32px;margin-top:40px;flex-wrap:wrap;" data-aos="fade-up" data-aos-delay="300">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:1.4rem;">📧</span>
+        <span style="font-size:0.88rem;color:rgba(255,255,255,0.75);">support@stackly.com</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:1.4rem;">💬</span>
+        <span style="font-size:0.88rem;color:rgba(255,255,255,0.75);">Live Chat · Mon–Sun 8am–10pm</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:1.4rem;">📞</span>
+        <span style="font-size:0.88rem;color:rgba(255,255,255,0.75);">+91 1800 000 0000 (Toll Free)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT GRID -->
+<section class="section" id="contactSection">
+  <div class="container">
+    <div class="contact-grid">
+      <!-- Left: Info -->
+      <div class="contact-info" data-aos="fade-right">
+        <div style="margin-bottom:20px;">
+          <span class="badge badge-primary" style="margin-bottom:16px;">📬 REACH OUT</span>
+          <h2 style="margin-bottom:10px;">We'd Love to <span class="gradient-text">Hear</span> from You</h2>
+          <p>Our support team typically responds within 2-4 hours during business hours.</p>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-details">
+            <h5>Office Address</h5>
+            <p>123 Streaming Avenue, Bandra West<br/>Mumbai, Maharashtra 400050, India</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div class="contact-details">
+            <h5>Email Us</h5>
+            <a href="mailto:support@stackly.com">support@stackly.com</a><br/>
+            <a href="mailto:business@stackly.com">business@stackly.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div class="contact-details">
+            <h5>Call Us</h5>
+            <a href="tel:+911800782259">+91 1800-STACKLY (782-259)</a>
+            <p>Toll-free within India</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div class="contact-details">
+            <h5>Working Hours</h5>
+            <p>Mon – Sat: 9:00 AM – 8:00 PM IST<br/>Sun: 10:00 AM – 5:00 PM IST</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="contact-form" data-aos="fade-left" data-aos-delay="100">
+        <h3 style="margin-bottom:6px;">Send a Message</h3>
+        <p style="margin-bottom:28px;">Fill in the form and we'll get back to you shortly.</p>
+        <form id="contactForm" novalidate>
+          <div class="form-group">
+            <label for="contactName">Full Name</label>
+            <input type="text" id="contactName" name="name" class="form-control" placeholder="John Doe" data-validate="required|alpha|min:2" data-err-required="Name is required."/>
+            <span class="form-error" id="contactNameError"></span>
+          </div>
+          <div class="form-group">
+            <label for="contactEmail">Email Address</label>
+            <input type="email" id="contactEmail" name="email" class="form-control" placeholder="you@example.com" data-validate="required|email" data-err-required="Email is required." data-err-email="Enter a valid email address."/>
+            <span class="form-error" id="contactEmailError"></span>
+          </div>
+          <div class="form-group">
+            <label for="contactPhone">Phone Number <span style="color:var(--clr-text-muted);font-weight:400;">(optional)</span></label>
+            <input type="tel" id="contactPhone" name="phone" class="form-control" placeholder="+91 98765 43210" data-validate="phone"/>
+            <span class="form-error" id="contactPhoneError"></span>
+          </div>
+          <div class="form-group">
+            <label for="contactSubject">Subject</label>
+            <select id="contactSubject" name="subject" class="form-control select-control" data-validate="required" data-err-required="Please select a subject.">
+              <option value="">Select a subject...</option>
+              <option value="general">General Inquiry</option>
+              <option value="billing">Billing &amp; Payments</option>
+              <option value="technical">Technical Issue</option>
+              <option value="content">Content Request</option>
+              <option value="other">Other</option>
+            </select>
+            <span class="form-error" id="contactSubjectError"></span>
+          </div>
+          <div class="form-group">
+            <label for="contactMessage">Your Message</label>
+            <textarea id="contactMessage" name="message" class="form-control" placeholder="Tell us how we can help you..." data-validate="required|min:10" data-err-required="Message is required." data-err-min="Please write at least 10 characters."></textarea>
+            <span class="form-error" id="contactMessageError"></span>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" id="contactSubmitBtn" style="width:100%;justify-content:center;">Send Message →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section style="background:var(--clr-bg2);padding:60px 0;" id="mapSection">
+  <div class="container">
+    <div class="section-header text-center" data-aos="fade-up" style="margin-bottom:32px;">
+      <h2>Find <span class="gradient-text">Us</span></h2>
+    </div>
+    <div class="map-placeholder" data-aos="zoom-in" style="height:320px;">
+      <div class="map-grid"></div>
+      <div style="position:relative;z-index:2;text-align:center;">
+        <div style="margin-bottom:12px;">📍</div>
+        <p style="font-weight:600;color:var(--clr-text);margin-bottom:4px;">Stackly HQ — Mumbai, India</p>
+        <p>Interactive map coming soon</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="contactFaqSection">
+  <div class="container">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2>Support <span class="gradient-text">FAQ</span></h2>
+      <p>Quick answers to common support questions</p>
+      <div class="section-line"></div>
+    </div>
+    <div class="faq-list" data-aos="fade-up" data-aos-delay="100">
+      <div class="faq-item">
+        <button class="faq-q" id="cFaq1">How do I reset my password? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Go to the Login page and click "Forgot password?". Enter your registered email and we'll send you a password reset link within seconds. The link is valid for 24 hours.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" id="cFaq2">How do I cancel my subscription? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Log in to your Dashboard → Subscription → Cancel Plan. You'll continue to have access until the end of your current billing period. No cancellation fees ever.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" id="cFaq3">How do I report a content issue or bug? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Use the contact form above with "Technical Issue" or "Content Request" as the subject. Include as much detail as possible — device type, browser, the title in question and steps to reproduce the issue.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" id="cFaq4">What is Stackly's refund policy? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>We offer a full refund within 7 days of any new subscription or plan change. After 7 days, you can cancel anytime but no partial refund is issued for the remaining period. Contact billing@stackly.com for refund requests.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL CONNECT -->
+<section style="background:var(--clr-bg2);padding:80px 0;" id="socialConnect">
+  <div class="container">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2>Connect With <span class="gradient-text">Us</span></h2>
+      <p>Follow us on social media for the latest updates, behind-the-scenes and giveaways</p>
+      <div class="section-line"></div>
+    </div>
+    <div class="social-connect-grid" data-aos="fade-up" data-aos-delay="100">
+      <a href="404.html" class="social-card"><div class="s-icon">📘</div><h4>Facebook</h4><p style=>@StacklyOfficial</p></a>
+      <a href="404.html" class="social-card"><div class="s-icon">🐦</div><h4>Twitter / X</h4><p style=>@StacklyHQ</p></a>
+      <a href="404.html" class="social-card"><div class="s-icon">📸</div><h4>Instagram</h4><p style=>@stackly.official</p></a>
+      <a href="404.html" class="social-card"><div class="s-icon">▶️</div><h4>YouTube</h4><p style=>Stackly Official</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="section" id="contactNewsletter">
+  <div class="container">
+    <div class="newsletter" data-aos="zoom-in">
+      <div class="newsletter-content">
+        <span class="badge badge-primary" style="margin-bottom:16px;">📧 STAY UPDATED</span>
+        <h2>Get <span class="gradient-text">Updates</span></h2>
+        <p>Subscribe to our newsletter for support tips, new features and exclusive content alerts.</p>
+        <form id="newsletterForm" class="newsletter-form" novalidate>
+          <input type="email" id="contactNewsletterEmail" name="email" placeholder="Enter your email address" data-validate="required|email" class="form-control" style="border-radius:40px;"/>
+          <span class="form-error" id="contactNewsletterEmailError"></span>
+          <button type="submit" class="btn btn-primary" id="contactNewsletterBtn">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand" data-aos="fade-up">
+        <a href="index.html" class="logo-btn"><img src="assets/img/stackly_logo.webp" class="logo-img" alt="Logo"></a>
+        <p>Your ultimate entertainment destination. Questions or feedback? We're always listening.</p>
+        <div class="footer-socials">
+          <a href="404.html" class="social-btn" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a><a href="404.html" class="social-btn" aria-label="Twitter / X"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.261 5.636 5.903-5.636zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="404.html" class="social-btn" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a><a href="404.html" class="social-btn" aria-label="YouTube"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col" data-aos="fade-up" data-aos-delay="100">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="index.html">Home</a></li><li><a href="movies.html">Movies</a></li>
+          <li><a href="series.html">Series</a></li><li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col" data-aos="fade-up" data-aos-delay="200">
+        <h5>Support</h5>
+        <ul>
+          <li><a href="404.html">Help Centre</a></li><li><a href="404.html">Privacy Policy</a></li>
+          <li><a href="404.html">Terms of Service</a></li><li><a href="404.html">Cookie Policy</a></li>
+          <li><a href="404.html">Report an Issue</a></li>
+        </ul>
+      </div>
+      <div class="footer-col" data-aos="fade-up" data-aos-delay="300">
+        <h5>Download App</h5>
+        <div class="footer-apps">
+          <a href="404.html" class="app-badge"><span style=>🍎</span><div class="app-text"><small>Download on the</small><span>App Store</span></div></a>
+          <a href="404.html" class="app-badge"><span style=>🤖</span><div class="app-text"><small>Get it on</small><span>Google Play</span></div></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Stackly. All rights reserved.</p>
+      <div class="footer-links"><a href="404.html">Privacy</a><a href="404.html">Terms</a><a href="404.html">Sitemap</a></div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop">↑</button>
+<div class="toast-container" id="toastContainer"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="assets/js/validation.js"></script>
+<script src="assets/js/script.js"></script>
+</body>
+</html>

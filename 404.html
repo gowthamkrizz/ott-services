@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 - Page Not Found | Stackly</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <style>
+    .error-scene {
+      min-height: calc(100vh - 72px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--clr-bg);
+    }
+    .error-scene-bg {
+      position: absolute; inset: 0;
+      background: url('assets/img/28.webp') center/cover no-repeat;
+      opacity: 0.08;
+      z-index: 0;
+    }
+    .error-scene::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(124,58,237,0.22) 0%, transparent 65%),
+                  radial-gradient(ellipse at 80% 80%, rgba(6,182,212,0.12) 0%, transparent 50%);
+      z-index: 0;
+    }
+    .error-inner {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      padding: 60px 24px;
+      max-width: 680px;
+    }
+    .error-film-strip {
+      display: flex; gap: 10px; margin-bottom: 40px; opacity: 0.5;
+    }
+    .film-hole {
+      width: 14px; height: 14px;
+      border: 2px solid rgba(255,255,255,0.25);
+      border-radius: 3px;
+    }
+    .error-big-number {
+      font-size: clamp(8rem, 20vw, 14rem);
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-accent) 50%, var(--clr-accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0;
+      filter: drop-shadow(0 0 40px rgba(124,58,237,0.5));
+      animation: errorPulse 3s ease-in-out infinite;
+      letter-spacing: -4px;
+    }
+    @keyframes errorPulse {
+      0%, 100% { filter: drop-shadow(0 0 30px rgba(124,58,237,0.4)); }
+      50% { filter: drop-shadow(0 0 60px rgba(168,85,247,0.7)); }
+    }
+    .error-screen-line {
+      width: 280px; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--clr-primary), var(--clr-accent2), transparent);
+      margin: 8px auto 28px;
+      animation: scanline 2s linear infinite;
+    }
+    @keyframes scanline {
+      0% { opacity: 0.4; transform: scaleX(0.7); }
+      50% { opacity: 1; transform: scaleX(1); }
+      100% { opacity: 0.4; transform: scaleX(0.7); }
+    }
+    .error-badge-row {
+      display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .error-title {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 700;
+      color: var(--clr-text);
+      margin-bottom: 14px;
+    }
+    .error-desc {
+      color: var(--clr-text-muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 460px;
+      margin: 0 auto 36px;
+    }
+    .error-actions {
+      display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+      margin-bottom: 48px;
+    }
+    .error-suggestions {
+      background: var(--clr-card);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-md);
+      padding: 28px 32px;
+      width: 100%;
+      text-align: left;
+    }
+    .error-suggestions h4 {
+      color: var(--clr-text-muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 16px;
+    }
+    .suggestion-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .suggestion-link {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-sm);
+      color: var(--clr-text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    .suggestion-link:hover {
+      color: var(--clr-text);
+      background: rgba(124,58,237,0.12);
+      border-color: var(--clr-primary);
+      transform: translateY(-2px);
+    }
+    .suggestion-link .s-icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--clr-primary), var(--clr-primary2));
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    @media (max-width: 480px) {
+      .suggestion-links { grid-template-columns: 1fr; }
+      .error-suggestions { padding: 20px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar scrolled" id="mainNav">
+  <div class="nav-logo">
+    <a href="index.html" class="logo-btn" style="display:flex;align-items:center;gap:8px;">
+      <img src="assets/img/stackly_logo.webp" class="logo-img" alt="Logo"/>
+    </a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="movies.html">Movies</a></li>
+    <li><a href="series.html">Series</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+    <a href="login.html" class="btn btn-primary btn-sm">Subscribe</a>
+    <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="index.html">Home</a><a href="movies.html">Movies</a><a href="series.html">Series</a>
+  <a href="about.html">About</a><a href="contact.html">Contact</a>
+  <a href="login.html" class="btn btn-primary">Subscribe Now</a>
+</div>
+
+<!-- 404 SCENE -->
+<div class="error-scene">
+  <div class="error-scene-bg"></div>
+
+  <div class="error-inner">
+    <!-- Film strip decoration -->
+    <div class="error-film-strip" data-aos="fade-down">
+      <div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div>
+      <div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div>
+      <div class="film-hole"></div><div class="film-hole"></div>
+    </div>
+
+    <!-- Big 404 -->
+    <div class="error-big-number" data-aos="zoom-in">404</div>
+    <div class="error-screen-line"></div>
+
+    <!-- Badge row -->
+    <div class="error-badge-row" data-aos="fade-up" data-aos-delay="100">
+      <span class="badge badge-primary">🎬 Signal Lost</span>
+      <span class="badge badge-accent">Stream Interrupted</span>
+    </div>
+
+    <h1 class="error-title" data-aos="fade-up" data-aos-delay="150">
+      This Page Isn't in Our Library
+    </h1>
+    <p class="error-desc" data-aos="fade-up" data-aos-delay="200">
+      Looks like this reel went missing from the vault. The page you're looking for may have been moved, deleted, or is still in post-production.
+    </p>
+
+    <div class="error-actions" data-aos="fade-up" data-aos-delay="260">
+      <a href="index.html" class="btn btn-primary btn-lg">← Back to Home</a>
+      <a href="signup.html" class="btn btn-accent btn-lg">🚀 Get Started</a>
+      <a href="movies.html" class="btn btn-outline btn-lg">Browse Movies</a>
+    </div>
+
+    <!-- Quick navigation suggestions -->
+    <div class="error-suggestions" data-aos="fade-up" data-aos-delay="320">
+      <h4>Jump to a popular destination</h4>
+      <div class="suggestion-links">
+        <a href="movies.html" class="suggestion-link">
+          <div class="s-icon">🎬</div>
+          <span>Movies</span>
+        </a>
+        <a href="series.html" class="suggestion-link">
+          <div class="s-icon">📺</div>
+          <span>Series</span>
+        </a>
+        <a href="about.html" class="suggestion-link">
+          <div class="s-icon">ℹ️</div>
+          <span>About Us</span>
+        </a>
+        <a href="contact.html" class="suggestion-link">
+          <div class="s-icon">📬</div>
+          <span>Contact Support</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="border-top: 1px solid var(--clr-border); padding: 20px 0; background: var(--clr-bg1);">
+  <div class="container">
+    <div class="footer-bottom" style="border: none; padding: 0;">
+      <p>© 2024 Stackly. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="assets/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Stackly</title>
+  <meta name="description" content="Your Stackly dashboard — manage your watchlist, profile, subscription and settings."/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <style>
+    @media(max-width:900px){
+      .dashboard-wrapper{grid-template-columns:1fr!important;}
+      .dash-sidebar{position:relative!important;top:auto!important;height:auto!important;flex-direction:column;max-height:none;}
+      .dash-sidebar .user-info{display:flex;align-items:center;gap:16px;text-align:left;}
+      .dash-sidebar .user-avatar{margin:0;}
+    }
+    .toggle-switch{position:relative;width:48px;height:26px;display:inline-block;}
+    .toggle-switch input{opacity:0;width:0;height:0;}
+    .toggle-slider{position:absolute;cursor:pointer;inset:0;background:var(--clr-bg3);border-radius:99px;transition:var(--transition);}
+    .toggle-slider::before{content:'';position:absolute;height:20px;width:20px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:var(--transition);}
+    .toggle-switch input:checked + .toggle-slider{background:var(--clr-primary);}
+    .toggle-switch input:checked + .toggle-slider::before{transform:translateX(22px);}
+    .setting-row{display:flex;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--clr-border);}
+    .setting-row:last-child{border-bottom:none;}
+    .danger-zone{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3);border-radius:var(--radius-md);padding:24px;margin-top:28px;}
+    .current-plan{background:linear-gradient(135deg,rgba(124,58,237,0.12),rgba(168,85,247,0.06));border:1px solid var(--clr-primary);border-radius:var(--radius-lg);padding:32px;margin-bottom:32px;}
+    .pw-strength-label{color:var(--clr-text-muted);margin-top:4px;}
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar scrolled" id="mainNav">
+  <div class="nav-logo">
+    <a href="index.html" class="logo-btn"><img src="assets/img/stackly_logo.webp" class="logo-img" alt="Logo"></a>
+    <span class="nav-tagline">Stream Everything</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="movies.html">Movies</a></li>
+    <li><a href="series.html">Series</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span style="color:var(--clr-text-muted);display:none;" class="nav-user-name">John</span>
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--clr-primary),var(--clr-accent));display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;cursor:pointer;" id="navAvatar">J</div>
+    </div>
+    <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="index.html">Home</a><a href="movies.html">Movies</a><a href="series.html">Series</a>
+  <a href="about.html">About</a><a href="contact.html">Contact</a>
+  <a href="login.html" class="btn btn-outline">Logout</a>
+</div>
+
+<!-- DASHBOARD WRAPPER -->
+<div class="dashboard-wrapper">
+  <!-- SIDEBAR -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="user-info">
+      <div class="user-avatar">J</div>
+      <div>
+        <h5>John Doe</h5>
+        <p>john@stackly.com</p>
+        <span class="badge badge-gold plan-tag">⭐ PREMIUM</span>
+      </div>
+    </div>
+    <div class="dash-nav-section">Main</div>
+    <a class="dash-nav-link active" data-section="overview" id="navOverview"><span class="icon">🏠</span> Overview</a>
+    <a class="dash-nav-link" data-section="watchlist" id="navWatchlist"><span class="icon">📺</span> My Watchlist</a>
+    <a class="dash-nav-link" data-section="history" id="navHistory"><span class="icon">📜</span> Watch History</a>
+    <a class="dash-nav-link" data-section="downloads" id="navDownloads"><span class="icon">⬇️</span> Downloads</a>
+    <div class="dash-nav-section">Account</div>
+    <a class="dash-nav-link" data-section="profile" id="navProfile"><span class="icon">👤</span> Profile</a>
+    <a class="dash-nav-link" data-section="subscription" id="navSubscription"><span class="icon">💳</span> Subscription</a>
+    <a class="dash-nav-link" data-section="settings" id="navSettings"><span class="icon">⚙️</span> Settings</a>
+    <div class="dash-nav-section">More</div>
+    <a class="dash-nav-link" href="contact.html"><span class="icon">❓</span> Help Center</a>
+    <a class="dash-nav-link" href="login.html" style="color:var(--clr-danger);"><span class="icon">🚪</span> Logout</a>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="dash-content">
+
+    <!-- ═══════ OVERVIEW ═══════ -->
+    <div class="dash-tab-content" id="overview">
+      <div class="dash-header" data-aos="fade-up">
+        <div>
+          <h2>Welcome back, <span class="gradient-text">John</span>! 👋</h2>
+          <p>Here's what's happening with your account today.</p>
+        </div>
+        <span class="badge badge-accent" id="dashDate"></span>
+      </div>
+
+      <div class="dash-stats" data-aos="fade-up" data-aos-delay="100">
+        <div class="dash-stat">
+          <div class="dash-stat-icon">📺</div>
+          <div class="dash-stat-num">24</div>
+          <div class="dash-stat-label">Watchlist Items</div>
+        </div>
+        <div class="dash-stat">
+          <div class="dash-stat-icon">⏱️</div>
+          <div class="dash-stat-num">156</div>
+          <div class="dash-stat-label">Hours Watched</div>
+        </div>
+        <div class="dash-stat">
+          <div class="dash-stat-icon">⬇️</div>
+          <div class="dash-stat-num">12</div>
+          <div class="dash-stat-label">Downloads</div>
+        </div>
+        <div class="dash-stat">
+          <div class="dash-stat-icon">⭐</div>
+          <div class="dash-stat-num">8</div>
+          <div class="dash-stat-label">Reviews Given</div>
+        </div>
+      </div>
+
+      <h3 class="dash-section-title" data-aos="fade-up">🕐 Continue Watching</h3>
+      <div class="watch-history" data-aos="fade-up" data-aos-delay="100">
+        <div class="history-card" data-aos="fade-up" data-aos-delay="50">
+          <div class="history-thumb" style="background:url('assets//img/14.webp') center/cover;aspect-ratio:16/9;"></div>
+          <div class="history-info">
+            <h5>Dark Matter</h5>
+            <p style="color:var(--clr-text-muted);">S2 E5 · 23 min left</p>
+            <div class="progress-bar"><div class="progress-fill" style="width:72%;"></div></div>
+          </div>
+        </div>
+        <div class="history-card" data-aos="fade-up" data-aos-delay="120">
+          <div class="history-thumb" style="background:url('assets//img/15.webp') center/cover;aspect-ratio:16/9;"></div>
+          <div class="history-info">
+            <h5>The Last Frontier</h5>
+            <p style="color:var(--clr-text-muted);">S3 E2 · 38 min left</p>
+            <div class="progress-bar"><div class="progress-fill" style="width:45%;"></div></div>
+          </div>
+        </div>
+        <div class="history-card" data-aos="fade-up" data-aos-delay="190">
+          <div class="history-thumb" style="background:url('assets//img/16.webp') center/cover;aspect-ratio:16/9;"></div>
+          <div class="history-info">
+            <h5>Crimson Empire</h5>
+            <p style="color:var(--clr-text-muted);">Movie · 52 min left</p>
+            <div class="progress-bar"><div class="progress-fill" style="width:60%;"></div></div>
+          </div>
+        </div>
+        <div class="history-card" data-aos="fade-up" data-aos-delay="260">
+          <div class="history-thumb" style="background:url('assets//img/17.webp') center/cover;aspect-ratio:16/9;"></div>
+          <div class="history-info">
+            <h5>Velvet Noir</h5>
+            <p style="color:var(--clr-text-muted);">Movie · 10 min left</p>
+            <div class="progress-bar"><div class="progress-fill" style="width:89%;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="dash-section-title" data-aos="fade-up">✨ Recommended For You</h3>
+      <div class="scroll-row" data-aos="fade-up" data-aos-delay="100">
+        <div class="content-card" style="flex:0 0 160px;"><div class="thumb" style="background:url('assets//img/19.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-accent">HD</span></div><span class="rating">⭐ 9.2</span><div class="overlay"><h4>Cosmos</h4><p>Sci-Fi</p><a href="#" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+        <div class="content-card" style="flex:0 0 160px;"><div class="thumb" style="background:url('assets//img/20.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">NEW</span></div><span class="rating">⭐ 8.8</span><div class="overlay"><h4>Emerald</h4><p>Drama</p><a href="#" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+        <div class="content-card" style="flex:0 0 160px;"><div class="thumb" style="background:url('assets//img/21.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-gold">4K</span></div><span class="rating">⭐ 8.5</span><div class="overlay"><h4>Firestorm</h4><p>Action</p><a href="#" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+        <div class="content-card" style="flex:0 0 160px;"><div class="thumb" style="background:url('assets//img/22.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-accent">HD</span></div><span class="rating">⭐ 7.9</span><div class="overlay"><h4>Blue Moon</h4><p>Thriller</p><a href="#" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+        <div class="content-card" style="flex:0 0 160px;"><div class="thumb" style="background:url('assets//img/23.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">NEW</span></div><span class="rating">⭐ 9.0</span><div class="overlay"><h4>Indigo</h4><p>Mystery</p><a href="#" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+        <div class="content-card" style="flex:0 0 160px;"><div class="thumb" style="background:url('assets//img/24.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-gold">4K</span></div><span class="rating">⭐ 8.4</span><div class="overlay"><h4>Amber</h4><p>Romance</p><a href="#" class= "btn btn-primary btn-sm">▶ Play</a></div></div>
+      </div>
+    </div>
+
+    <!-- ═══════ PROFILE ═══════ -->
+    <div class="dash-tab-content" id="profile" style="display:none;">
+      <div class="dash-header" data-aos="fade-up">
+        <h2>Your <span class="gradient-text">Profile</span></h2>
+      </div>
+
+      <div style="background:var(--clr-card);border:1px solid var(--clr-border);border-radius:var(--radius-lg);padding:32px;margin-bottom:32px;" data-aos="fade-up" data-aos-delay="100">
+        <h3 style="margin-bottom:24px;">Personal Information</h3>
+        <form id="profileForm" novalidate>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div class="form-group">
+              <label for="profileName">Full Name</label>
+              <input type="text" id="profileName" name="name" class="form-control" value="John Doe" data-validate="required|alpha|min:2" data-err-required="Name is required."/>
+              <span class="form-error" id="profileNameError"></span>
+            </div>
+            <div class="form-group">
+              <label for="profileEmail">Email Address</label>
+              <input type="email" id="profileEmail" name="email" class="form-control" value="john@stackly.com" data-validate="required|email"/>
+              <span class="form-error" id="profileEmailError"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="profilePhone">Phone Number</label>
+            <input type="tel" id="profilePhone" name="phone" class="form-control" placeholder="+91 98765 43210" data-validate="phone"/>
+            <span class="form-error" id="profilePhoneError"></span>
+          </div>
+          <div class="form-group">
+            <label for="profileBio">Bio</label>
+            <textarea id="profileBio" name="bio" class="form-control" placeholder="Tell us about yourself..." style="min-height:100px;">Movie enthusiast and sci-fi lover. Premium subscriber since 2022.</textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" id="profileSaveBtn">Save Changes</button>
+        </form>
+      </div>
+
+      <div style="background:var(--clr-card);border:1px solid var(--clr-border);border-radius:var(--radius-lg);padding:32px;" data-aos="fade-up" data-aos-delay="200">
+        <h3 style="margin-bottom:24px;">Change Password</h3>
+        <form id="changePasswordForm" novalidate>
+          <div class="form-group">
+            <label for="currentPassword">Current Password</label>
+            <div class="password-wrap">
+              <input type="password" id="currentPassword" name="current_password" class="form-control" placeholder="Enter current password" data-validate="required" data-err-required="Current password is required."/>
+              <button type="button" class="toggle-pw" id="toggleCurrentPw">👁️</button>
+            </div>
+            <span class="form-error" id="currentPasswordError"></span>
+          </div>
+          <div class="form-group">
+            <label for="newPassword">New Password</label>
+            <div class="password-wrap">
+              <input type="password" id="newPassword" name="new_password" class="form-control" placeholder="Create a strong password" data-validate="required|strong"/>
+              <button type="button" class="toggle-pw" id="toggleNewPw">👁️</button>
+            </div>
+            <div class="pw-strength"><div class="pw-strength-bar" id="newPwBar" style="width:0%;"></div></div>
+            <div class="pw-strength-label" id="newPwLabel"></div>
+            <span class="form-error" id="newPasswordError"></span>
+          </div>
+          <div class="form-group">
+            <label for="confirmNewPassword">Confirm New Password</label>
+            <div class="password-wrap">
+              <input type="password" id="confirmNewPassword" name="confirm_password" class="form-control" placeholder="Re-enter new password" data-validate="required|match:#newPassword"/>
+              <button type="button" class="toggle-pw" id="toggleConfirmNewPw">👁️</button>
+            </div>
+            <span class="form-error" id="confirmNewPasswordError"></span>
+          </div>
+          <button type="submit" class="btn btn-primary" id="changePwBtn">Update Password</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ═══════ WATCHLIST ═══════ -->
+    <div class="dash-tab-content" id="watchlist" style="display:none;">
+      <div class="dash-header" data-aos="fade-up">
+        <h2>My <span class="gradient-text">Watchlist</span></h2>
+        <span class="badge badge-primary">24 Items</span>
+      </div>
+      <div class="content-grid" data-aos="fade-up" data-aos-delay="100">
+        <div class="content-card"><div class="thumb" style="background:url('assets//img/25.webp') center/cover;aspect-ratio:2/3;"></div><span class="rating">⭐ 9.2</span><div class="overlay"><h4>Cosmos Reborn</h4><p>Sci-Fi</p><button class="btn btn-primary btn-sm">▶ Play</button><button class="btn btn-outline btn-sm" style="margin-top:6px;padding:6px 12px;"> ✕ Remove</button></div></div>
+        <div class="content-card"><div class="thumb" style="background:url('assets//img/26.webp') center/cover;aspect-ratio:2/3;"></div><span class="rating">⭐ 8.6</span><div class="overlay"><h4>Dark Matter</h4><p>Sci-Fi</p><button class="btn btn-primary btn-sm">▶ Play</button><button class="btn btn-outline btn-sm" style="margin-top:6px;padding:6px 12px;">✕ Remove</button></div></div>
+        <div class="content-card"><div class="thumb" style="background:url('assets//img/27.webp') center/cover;aspect-ratio:2/3;"></div><span class="rating">⭐ 8.3</span><div class="overlay"><h4>Crimson Empire</h4><p>Crime</p><button class="btn btn-primary btn-sm">▶ Play</button><button class="btn btn-outline btn-sm" style="margin-top:6px;padding:6px 12px;">✕ Remove</button></div></div>
+        <div class="content-card"><div class="thumb" style="background:url('assets//img/28.webp') center/cover;aspect-ratio:2/3;"></div><span class="rating">⭐ 9.1</span><div class="overlay"><h4>The Last Frontier</h4><p>Action</p><button class="btn btn-primary btn-sm">▶ Play</button><button class="btn btn-outline btn-sm" style="margin-top:6px;padding:6px 12px;">✕ Remove</button></div></div>
+        <div class="content-card"><div class="thumb" style="background:url('assets//img/29.webp') center/cover;aspect-ratio:2/3;"></div><span class="rating">⭐ 8.5</span><div class="overlay"><h4>Purple Rain</h4><p>Drama</p><button class="btn btn-primary btn-sm">▶ Play</button><button class="btn btn-outline btn-sm" style="margin-top:6px;padding:6px 12px;">✕ Remove</button></div></div>
+        <div class="content-card"><div class="thumb" style="background:url('assets//img/30.webp') center/cover;aspect-ratio:2/3;"></div><span class="rating">⭐ 8.7</span><div class="overlay"><h4>Blue Horizon</h4><p>Adventure</p><button class="btn btn-primary btn-sm">▶ Play</button><button class="btn btn-outline btn-sm" style="margin-top:6px;padding:6px 12px;">✕ Remove</button></div></div>
+      </div>
+    </div>
+
+    <!-- ═══════ SUBSCRIPTION ═══════ -->
+    <div class="dash-tab-content" id="subscription" style="display:none;">
+      <div class="dash-header" data-aos="fade-up">
+        <h2>Your <span class="gradient-text">Subscription</span></h2>
+      </div>
+
+      <div class="current-plan" data-aos="fade-up" data-aos-delay="100">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:20px;">
+          <div>
+            <span class="badge badge-gold" style="margin-bottom:10px;">⭐ CURRENT PLAN</span>
+            <h3>Premium Plan — ₹799/mo</h3>
+          </div>
+          <span style="color:var(--clr-text-muted);">Renews: July 15, 2024</span>
+        </div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;">
+          <div style="color:var(--clr-text-muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--clr-success);">✓</span> 4K Ultra HD + HDR</div>
+          <div style="color:var(--clr-text-muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--clr-success);">✓</span> 6 Screens</div>
+          <div style="color:var(--clr-text-muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--clr-success);">✓</span> Unlimited Downloads</div>
+          <div style="color:var(--clr-text-muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--clr-success);">✓</span> Dolby Atmos</div>
+        </div>
+      </div>
+
+      <h3 class="dash-section-title" data-aos="fade-up">Switch Plan</h3>
+      <div class="plans-grid" data-aos="fade-up" data-aos-delay="100">
+        <div class="plan-card">
+          <div class="plan-name">Basic</div>
+          <div class="plan-price">₹199<span>/mo</span></div>
+          <ul class="plan-features" style=>
+            <li><span class="check">✓</span> HD Streaming</li>
+            <li><span class="check">✓</span> 1 Screen</li>
+            <li><span class="cross">✗</span> No Downloads</li>
+          </ul>
+          <button class="btn btn-outline" style="width:100%;justify-content:center;" id="switchBasic">Downgrade</button>
+        </div>
+        <div class="plan-card popular">
+          <div class="popular-badge">Your Plan</div>
+          <div class="plan-name">Premium</div>
+          <div class="plan-price" style="background:linear-gradient(135deg,var(--clr-primary2),var(--clr-accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">₹799<span style="-webkit-text-fill-color:var(--clr-text-muted);">/mo</span></div>
+          <ul class="plan-features" style=>
+            <li><span class="check">✓</span> 4K + HDR</li>
+            <li><span class="check">✓</span> 6 Screens</li>
+            <li><span class="check">✓</span> Unlimited Downloads</li>
+          </ul>
+          <button class="btn btn-primary" style="width:100%;justify-content:center;opacity:0.5;cursor:default;" disabled>Current Plan</button>
+        </div>
+        <div class="plan-card">
+          <div class="plan-name">Standard</div>
+          <div class="plan-price">₹499<span>/mo</span></div>
+          <ul class="plan-features" style=>
+            <li><span class="check">✓</span> Full HD + 4K</li>
+            <li><span class="check">✓</span> 3 Screens</li>
+            <li><span class="check">✓</span> 25 Downloads</li>
+          </ul>
+          <button class="btn btn-outline" style="width:100%;justify-content:center;" id="switchStandard">Downgrade</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ SETTINGS ═══════ -->
+    <div class="dash-tab-content" id="settings" style="display:none;">
+      <div class="dash-header" data-aos="fade-up">
+        <h2>Account <span class="gradient-text">Settings</span></h2>
+      </div>
+
+      <div style="background:var(--clr-card);border:1px solid var(--clr-border);border-radius:var(--radius-lg);padding:32px;margin-bottom:28px;" data-aos="fade-up" data-aos-delay="100">
+        <h3 style="margin-bottom:8px;">Preferences</h3>
+        <p style="margin-bottom:20px;">Customise your Stackly experience</p>
+
+        <div class="setting-row">
+          <div><h4 style="margin-bottom:2px;">Language</h4><p style=>Display language for the app</p></div>
+          <select class="filter-select" id="settingsLang"><option>English</option><option>Hindi</option><option>Tamil</option><option>Telugu</option><option>Marathi</option></select>
+        </div>
+        <div class="setting-row">
+          <div><h4 style="margin-bottom:2px;">Video Quality</h4><p style=>Default streaming quality</p></div>
+          <select class="filter-select" id="settingsQuality"><option>Auto</option><option>4K Ultra HD</option><option>Full HD (1080p)</option><option>HD (720p)</option><option>SD (480p)</option></select>
+        </div>
+        <div class="setting-row">
+          <div><h4 style="margin-bottom:2px;">Autoplay Next Episode</h4><p style=>Automatically play next episode</p></div>
+          <label class="toggle-switch"><input type="checkbox" id="settingsAutoplay" checked/><span class="toggle-slider"></span></label>
+        </div>
+        <div class="setting-row">
+          <div><h4 style="margin-bottom:2px;">Email Notifications</h4><p style=>New releases and recommendations</p></div>
+          <label class="toggle-switch"><input type="checkbox" id="settingsNotifications" checked/><span class="toggle-slider"></span></label>
+        </div>
+        <div class="setting-row">
+          <div><h4 style="margin-bottom:2px;">Push Notifications</h4><p style=>Real-time alerts on your device</p></div>
+          <label class="toggle-switch"><input type="checkbox" id="settingsPush"/><span class="toggle-slider"></span></label>
+        </div>
+      </div>
+
+      <div class="danger-zone" data-aos="fade-up" data-aos-delay="200">
+        <h4 style="color:var(--clr-danger);margin-bottom:8px;">⚠️ Danger Zone</h4>
+        <p style="margin-bottom:16px;">Once you delete your account, all your data, watchlists and history will be permanently erased. This action cannot be undone.</p>
+        <button class="btn btn-sm" style="background:rgba(239,68,68,0.15);color:var(--clr-danger);border:1px solid rgba(239,68,68,0.4);" id="deleteAccountBtn">Delete Account</button>
+      </div>
+    </div>
+
+    <!-- ═══════ HISTORY (placeholder) ═══════ -->
+    <div class="dash-tab-content" id="history" style="display:none;">
+      <div class="dash-header" data-aos="fade-up"><h2>Watch <span class="gradient-text">History</span></h2></div>
+      <div class="watch-history" data-aos="fade-up" data-aos-delay="100">
+        <div class="history-card"><div class="history-thumb" style="background:url('assets//img/31.webp') center/cover;aspect-ratio:16/9;"></div><div class="history-info"><h5>Dark Matter S2 E5</h5><p style="color:var(--clr-text-muted);">Watched 2 hours ago</p><div class="progress-bar"><div class="progress-fill" style="width:72%;"></div></div></div></div>
+        <div class="history-card"><div class="history-thumb" style="background:url('assets//img/32.webp') center/cover;aspect-ratio:16/9;"></div><div class="history-info"><h5>Crimson Empire</h5><p style="color:var(--clr-text-muted);">Watched yesterday</p><div class="progress-bar"><div class="progress-fill" style="width:60%;"></div></div></div></div>
+        <div class="history-card"><div class="history-thumb" style="background:url('assets//img/33.webp') center/cover;aspect-ratio:16/9;"></div><div class="history-info"><h5>The Last Frontier S3 E2</h5><p style="color:var(--clr-text-muted);">Watched 2 days ago</p><div class="progress-bar"><div class="progress-fill" style="width:45%;"></div></div></div></div>
+        <div class="history-card"><div class="history-thumb" style="background:url('assets//img/36.webp') center/cover;aspect-ratio:16/9;"></div><div class="history-info"><h5>Neon City Blues</h5><p style="color:var(--clr-text-muted);">Watched 3 days ago</p><div class="progress-bar"><div class="progress-fill" style="width:100%;"></div></div></div></div>
+        <div class="history-card"><div class="history-thumb" style="background:url('assets//img/34.webp') center/cover;aspect-ratio:16/9;"></div><div class="history-info"><h5>Desert Storm</h5><p style="color:var(--clr-text-muted);">Watched last week</p><div class="progress-bar"><div class="progress-fill" style="width:100%;"></div></div></div></div>
+        <div class="history-card"><div class="history-thumb" style="background:url('assets//img/35.webp') center/cover;aspect-ratio:16/9;"></div><div class="history-info"><h5>Velvet Noir</h5><p style="color:var(--clr-text-muted);">Watched last week</p><div class="progress-bar"><div class="progress-fill" style="width:89%;"></div></div></div></div>
+      </div>
+    </div>
+
+    <!-- ═══════ DOWNLOADS (placeholder) ═══════ -->
+    <div class="dash-tab-content" id="downloads" style="display:none;">
+      <div class="dash-header" data-aos="fade-up"><h2>My <span class="gradient-text">Downloads</span></h2><span class="badge badge-primary">12 Items · 4.2 GB</span></div>
+      <div class="content-grid" data-aos="fade-up" data-aos-delay="100">
+        <div class="content-card"><div class="thumb" style="background:url('assets//img/27.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-accent">HD</span></div><div class="overlay"><h4>Dark Matter S2</h4><p>3 Episodes</p><button class="btn btn-primary btn-sm">▶</button></div></div>
+        <div class="content-card"><div class="thumb" style="background:url('assets//img/28.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-gold">4K</span></div><div class="overlay"><h4>The Last Frontier</h4><p>5 Episodes</p><button class="btn btn-primary btn-sm">▶</button></div></div>
+        <div class="content-card"><div class="thumb" style="background:url('assets//img/29.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-accent">HD</span></div><div class="overlay"><h4>Crimson Empire</h4><p>Full Movie</p><button class="btn btn-primary btn-sm">▶</button></div></div>
+        <div class="content-card"><div class="thumb" style="background:url('assets//img/30.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-accent">HD</span></div><div class="overlay"><h4>Neon City Blues</h4><p>Full Movie</p><button class="btn btn-primary btn-sm">▶</button></div></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer style="border-top:1px solid var(--clr-border);padding:28px 0;">
+  <div class="container">
+    <div class="footer-bottom" style="border:none;padding:0;">
+      <p>© 2024 Stackly. All rights reserved.</p>
+      <div class="footer-links"><a href="404.html">Privacy</a><a href="404.html">Terms</a><a href="contact.html">Help</a></div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop">↑</button>
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="assets/js/validation.js"></script>
+<script src="assets/js/script.js"></script>
+<script>
+  // Set today's date
+  const d=document.getElementById('dashDate');
+  if(d){const now=new Date();d.textContent=now.toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});}
+  // Delete account confirmation
+  const delBtn=document.getElementById('deleteAccountBtn');
+  if(delBtn){delBtn.addEventListener('click',()=>{if(confirm('Are you sure you want to delete your account? This cannot be undone.')){showToast('Account deletion requested. You will receive an email shortly.','info');}});}
+  // Plan switch
+  document.querySelectorAll('[id^="switch"]').forEach(btn=>{btn.addEventListener('click',()=>showToast('Plan change requested. Changes take effect next billing cycle.','info'));});
+</script>
+</body>
+</html>

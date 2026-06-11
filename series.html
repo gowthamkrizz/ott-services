@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Series - Stackly</title>
+  <meta name="description" content="Binge-worthy series on Stackly. Drama, Crime, Sci-Fi, Comedy — stream all seasons in HD &amp; 4K."/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="mainNav">
+  <div class="nav-logo">
+    <a href="index.html" class="logo-btn"><img src="assets/img/stackly_logo.webp" class="logo-img" alt="Logo"></a>
+    <span class="nav-tagline">Stream Everything</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="movies.html">Movies</a></li>
+    <li><a href="series.html" class="active">Series</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-search">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    <input type="text" id="navSearchSeries" placeholder="Search series..."/>
+  </div>
+  <div class="nav-actions">
+    <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+    <a href="login.html" class="btn btn-primary btn-sm">Subscribe</a>
+    <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="index.html">Home</a><a href="movies.html">Movies</a><a href="series.html">Series</a>
+  <a href="about.html">About</a><a href="contact.html">Contact</a>
+  <a href="login.html" class="btn btn-primary">Subscribe Now</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero has-bg" id="seriesHero" style="background-image: url('assets/img/3.webp');">
+  <div class="orb orb-1" style="background:rgba(6,182,212,0.18);"></div>
+  <div class="orb orb-2" style="background:rgba(124,58,237,0.14);"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Series</span></div>
+    <h1 data-aos="fade-up">Binge-Worthy <span class="gradient-text">Series</span></h1>
+    <p data-aos="fade-up" data-aos-delay="100" style="max-width:580px;">5,000+ series across every genre. New seasons drop weekly. Watch the full story — all episodes available, no weekly wait. From gripping dramas to laugh-out-loud comedies.</p>
+    <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;" data-aos="fade-up" data-aos-delay="200">
+      <span class="badge badge-accent">5,000+ Series</span>
+      <span class="badge badge-primary">New Seasons Weekly</span>
+      <span class="badge badge-gold">All Episodes Available</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,auto);gap:32px;margin-top:40px;" data-aos="fade-up" data-aos-delay="300">
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <span style="font-size:1.6rem;font-weight:900;color:#fff;">5K+</span>
+        <span style="font-size:0.78rem;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.08em;">Series</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <span style="font-size:1.6rem;font-weight:900;color:#fff;">30+</span>
+        <span style="font-size:0.78rem;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.08em;">Genres</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <span style="font-size:1.6rem;font-weight:900;color:#fff;">Weekly</span>
+        <span style="font-size:0.78rem;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.08em;">New Drops</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <span style="font-size:1.6rem;font-weight:900;color:#fff;">HD</span>
+        <span style="font-size:0.78rem;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.08em;">+ 4K</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER -->
+<section style="background:var(--clr-bg2);padding:32px 0;border-bottom:1px solid var(--clr-border);">
+  <div class="container">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <div class="tabs" style="flex:1;margin-bottom:0;">
+        <button class="tab-btn active" id="seriesTabAll">All</button>
+        <button class="tab-btn" id="seriesTabDrama">🎭 Drama</button>
+        <button class="tab-btn" id="seriesTabCrime">🔫 Crime</button>
+        <button class="tab-btn" id="seriesTabComedy">😂 Comedy</button>
+        <button class="tab-btn" id="seriesTabScifi">🚀 Sci-Fi</button>
+        <button class="tab-btn" id="seriesTabDoc">🎥 Documentary</button>
+      </div>
+      <select class="filter-select" id="seriesSortFilter" aria-label="Sort series">
+        <option>Sort By</option><option>Newest</option><option>Top Rated</option><option>Most Popular</option>
+      </select>
+    </div>
+  </div>
+</section>
+
+<!-- SERIES GRID -->
+<section class="section" id="seriesGridSection">
+  <div class="container">
+    <div class="content-row-header" data-aos="fade-up">
+      <h3><span class="icon">📺</span> All Series</h3>
+      <span style="color:var(--clr-text-muted);">Showing 10 of 5,240 results</span>
+    </div>
+    <div class="content-grid" data-aos="fade-up" data-aos-delay="100">
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/41.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-primary">S3 NEW</span></div><span class="rating">⭐ 9.1</span><div class="overlay"><h4>The Last Frontier</h4><p>Action · 3 Seasons</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/42.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">TRENDING</span></div><span class="rating">⭐ 8.6</span><div class="overlay"><h4>Dark Matter</h4><p>Sci-Fi · 2 Seasons</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/43.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-gold">EXCLUSIVE</span></div><span class="rating">⭐ 8.3</span><div class="overlay"><h4>Bloodlines</h4><p>Crime · 4 Seasons</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/1.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-accent">4K</span></div><span class="rating">⭐ 9.4</span><div class="overlay"><h4>Ocean Deep</h4><p>Drama · 2 Seasons</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/2.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">NEW</span></div><span class="rating">⭐ 7.9</span><div class="overlay"><h4>Emerald Isle</h4><p>Mystery · 1 Season</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/3.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-gold">S2 NEW</span></div><span class="rating">⭐ 8.8</span><div class="overlay"><h4>Amber Alert</h4><p>Thriller · 2 Seasons</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/4.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-primary">S2</span></div><span class="rating">⭐ 8.0</span><div class="overlay"><h4>Purple Rain</h4><p>Drama · 2 Seasons</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/5.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-accent">NEW</span></div><span class="rating">⭐ 8.7</span><div class="overlay"><h4>Blue Horizon</h4><p>Adventure · 1 Season</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/6.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">TRENDING</span></div><span class="rating">⭐ 8.5</span><div class="overlay"><h4>Grey Shadows</h4><p>Crime · 3 Seasons</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card"><div class="thumb" style="background:url('assets//img/7.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-gold">EXCLUSIVE</span></div><span class="rating">⭐ 9.0</span><div class="overlay"><h4>Jade Empire</h4><p>Drama · 2 Seasons</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+    </div>
+    <div style="text-align:center;margin-top:40px;" data-aos="fade-up">
+      <button class="btn btn-outline btn-lg" id="loadMoreSeries">Load More Series</button>
+    </div>
+  </div>
+</section>
+
+<!-- TRENDING BANNER -->
+<section style="background:var(--clr-bg2);padding:80px 0;" id="trendingSeriesBanner">
+  <div class="container">
+    <div class="content-row-header" data-aos="fade-up">
+      <h3><span class="icon">🔥</span> Currently Trending</h3>
+    </div>
+    <div class="featured-banner" data-aos="zoom-in" style="background:url('assets//img/10.webp') center/cover;">
+      <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);z-index:1;"></div>
+      <div class="content" data-aos="fade-right" data-aos-delay="100" style="position:relative;z-index:2;">
+        <span class="badge badge-red" style="margin-bottom:16px;">🔥 #1 THIS WEEK</span>
+        <h3 style="margin-bottom:16px;">The Last Frontier</h3>
+        <div style="display:flex;gap:12px;margin:12px 0;flex-wrap:wrap;">
+          <span style="color:var(--clr-text-muted);">2024 · Season 3</span>
+          <span style="color:var(--clr-text-muted);">Action · Drama</span>
+          <span style="color:var(--clr-accent2);">⭐ 9.1</span>
+        </div>
+        <p style="max-width:400px;">The crew of the Prometheus faces their greatest threat yet. 10 explosive episodes, now streaming in 4K. Start from Season 1 or jump straight in.</p>
+        <div style="display:flex;gap:12px;margin-top:20px;">
+          <a href="login.html" class="btn btn-primary">▶ Watch S3 E1</a>
+          <a href="login.html" class="btn btn-outline" id="lastFrontierInfo">All Seasons</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEW RELEASES ROW -->
+<section class="section" id="newSeriesSection">
+  <div class="container">
+    <div class="content-row-header" data-aos="fade-up">
+      <h3><span class="icon">✨</span> New This Week</h3>
+      <a href="#" class="see-all">See All →</a>
+    </div>
+    <div class="scroll-row" data-aos="fade-up" data-aos-delay="100">
+      <div class="content-card" style="flex:0 0 180px;"><div class="thumb" style="background:url('assets//img/11.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">TODAY</span></div><span class="rating">⭐ 8.3</span><div class="overlay"><h4>Phantom Code</h4><p>Thriller</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card" style="flex:0 0 180px;"><div class="thumb" style="background:url('assets//img/12.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">NEW</span></div><span class="rating">⭐ 7.6</span><div class="overlay"><h4>Green Veil</h4><p>Drama</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play
+      </a></div></div>
+      <div class="content-card" style="flex:0 0 180px;"><div class="thumb" style="background:url('assets//img/13.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">NEW</span></div><span class="rating">⭐ 8.9</span><div class="overlay"><h4>Ember Rising</h4><p>Action</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card" style="flex:0 0 180px;"><div class="thumb" style="background:url('assets//img/14.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">NEW</span></div><span class="rating">⭐ 8.1</span><div class="overlay"><h4>Indigo Moon</h4><p>Sci-Fi</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card" style="flex:0 0 180px;"><div class="thumb" style="background:url('assets//img/15.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">NEW</span></div><span class="rating">⭐ 8.7</span><div class="overlay"><h4>Red Pact</h4><p>Crime</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card" style="flex:0 0 180px;"><div class="thumb" style="background:url('assets//img/16.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">NEW</span></div><span class="rating">⭐ 7.8</span><div class="overlay"><h4>Magenta</h4><p>Romance</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card" style="flex:0 0 180px;"><div class="thumb" style="background:url('assets//img/17.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">NEW</span></div><span class="rating">⭐ 9.0</span><div class="overlay"><h4>Azure Deep</h4><p>Documentary</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+      <div class="content-card" style="flex:0 0 180px;"><div class="thumb" style="background:url('assets//img/18.webp') center/cover;aspect-ratio:2/3;"></div><div class="badge-wrap"><span class="badge badge-red">NEW</span></div><span class="rating">⭐ 8.4</span><div class="overlay"><h4>Forest Folk</h4><p>Comedy</p><a href="login.html" class="btn btn-primary btn-sm">▶ Play</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GENRE COLLECTIONS -->
+<section style="background:var(--clr-bg2);padding:80px 0;" id="genreCollections">
+  <div class="container">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2>Browse by <span class="gradient-text">Genre</span></h2>
+      <p>Find your next binge-worthy series by genre</p>
+      <div class="section-line"></div>
+    </div>
+    <div class="categories-grid" data-aos="fade-up" data-aos-delay="100">
+      <div class="category-card"><div class="category-icon">🎭</div><h4>Drama</h4><p>1,240+ series</p></div>
+      <div class="category-card"><div class="category-icon">🔫</div><h4>Crime</h4><p>890+ series</p></div>
+      <div class="category-card"><div class="category-icon">😂</div><h4>Comedy</h4><p>760+ series</p></div>
+      <div class="category-card"><div class="category-icon">🚀</div><h4>Sci-Fi</h4><p>540+ series</p></div>
+      <div class="category-card"><div class="category-icon">🎥</div><h4>Documentary</h4><p>680+ series</p></div>
+      <div class="category-card"><div class="category-icon">👻</div><h4>Horror</h4><p>320+ series</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="section" id="seriesNewsletter">
+  <div class="container">
+    <div class="newsletter" data-aos="zoom-in">
+      <div class="newsletter-content">
+        <span class="badge badge-accent" style="margin-bottom:16px;">📺 SERIES ALERTS</span>
+        <h2>Never Miss a <span class="gradient-text">New Season</span></h2>
+        <p>Get notified when your favourite series return and when new shows drop on Stackly.</p>
+        <form id="newsletterForm" class="newsletter-form" novalidate>
+          <input type="email" id="seriesNewsletterEmail" name="email" placeholder="Enter your email" data-validate="required|email" class="form-control" style="border-radius:40px;"/>
+          <span class="form-error" id="seriesNewsletterEmailError"></span>
+          <button type="button" class="btn btn-accent" id="seriesNewsletterBtn" onclick="window.location.href='404.html'">Get Alerts</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand" data-aos="fade-up">
+        <a href="index.html" class="logo-btn"><img src="assets/img/stackly_logo.webp" class="logo-img" alt="Logo"></a>
+        <p>Stream 5,000+ series across all genres. New seasons, new episodes — always on Stackly.</p>
+        <div class="footer-socials">
+          <a href="404.html" class="social-btn" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a><a href="404.html" class="social-btn" aria-label="Twitter / X"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.261 5.636 5.903-5.636zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="404.html" class="social-btn" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a><a href="404.html" class="social-btn" aria-label="YouTube"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col" data-aos="fade-up" data-aos-delay="100">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="index.html">Home</a></li><li><a href="movies.html">Movies</a></li>
+          <li><a href="series.html">Series</a></li><li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col" data-aos="fade-up" data-aos-delay="200">
+        <h5>Support</h5>
+        <ul>
+          <li><a href="404.html">Help Centre</a></li><li><a href="404.html">Privacy Policy</a></li>
+          <li><a href="404.html">Terms of Service</a></li><li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col" data-aos="fade-up" data-aos-delay="300">
+        <h5>Download App</h5>
+        <div class="footer-apps">
+          <a href="404.html" class="app-badge"><span style=>🍎</span><div class="app-text"><small>Download on the</small><span>App Store</span></div></a>
+          <a href="404.html" class="app-badge"><span style=>🤖</span><div class="app-text"><small>Get it on</small><span>Google Play</span></div></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Stackly. All rights reserved.</p>
+      <div class="footer-links"><a href="404.html">Privacy</a><a href="404.html">Terms</a><a href="404.html">Sitemap</a></div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop">↑</button>
+<div class="toast-container" id="toastContainer"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="assets/js/validation.js"></script>
+<script src="assets/js/script.js"></script>
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn=>{btn.addEventListener('click',function(){document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active');});});
+  const lms=document.getElementById('loadMoreSeries');if(lms){lms.addEventListener('click',()=>showToast('Loading more series...','info'));}
+</script>
+</body>
+</html>
