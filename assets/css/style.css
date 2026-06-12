@@ -273,6 +273,8 @@ p  { color: var(--clr-text-muted); line-height: 1.7; }
 .hero {
   position: relative; height: 100vh; min-height: 700px; overflow: hidden;
   max-width: 100vw;
+  padding-top: 72px;
+  box-sizing: border-box;
 }
 .hero-slide {
   position: absolute; inset: 0;
@@ -845,7 +847,7 @@ textarea.form-control { resize: vertical; min-height: 140px; }
 }
 .loader-logo { font-size: 2rem; font-weight: 900; }
 .loader-bar { width: 180px; height: 4px; background: var(--clr-bg3); border-radius: 99px; overflow: hidden; }
-.loader-fill { height: 100%; background: linear-gradient(90deg, var(--clr-primary), var(--clr-accent)); border-radius: 99px; animation: loaderAnim 1.8s ease-in-out forwards; }
+.loader-fill { height: 100%; background: linear-gradient(90deg, var(--clr-primary), var(--clr-accent)); border-radius: 99px; animation: loaderAnim 4s ease-in-out forwards; }
 
 /* ─── ── ────────────────────────────────────────────────────── */
 /* ─── KEYFRAME ANIMATIONS ───────────────────────────────────── */

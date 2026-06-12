@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
       loader.style.opacity = '0';
       loader.style.pointerEvents = 'none';
       setTimeout(() => loader.remove(), 500);
-    }, 2000);
+    }, 4500);
   }
 
   /* ── AOS Init ────────────────────────────────────────────── */
