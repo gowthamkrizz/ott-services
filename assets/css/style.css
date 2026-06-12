@@ -1253,3 +1253,879 @@ img.loaded { opacity: 1; }
   transform: translateY(-6px);
   box-shadow: 0 16px 40px rgba(0,0,0,0.4);
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   STACKLY — PATCH: Mobile fixes, Logo, Hamburger, Password, Preloader
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── FIX 4: Logo size increase ── */
+.logo-img {
+  width: 108px !important;
+  height: 108px !important;
+}
+@media (max-width: 768px) {
+  .logo-img { width: 80px !important; height: 80px !important; }
+}
+@media (max-width: 480px) {
+  .logo-img { width: 68px !important; height: 68px !important; }
+}
+
+/* ── FIX 2: Hamburger – animated, styled, working ── */
+/* Remove display:none override so it only shows on mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 0;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  background: rgba(124,58,237,0.12);
+  border: 1px solid rgba(124,58,237,0.3);
+  position: relative;
+  z-index: 1050;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+.hamburger:hover {
+  background: rgba(124,58,237,0.25);
+  border-color: var(--clr-primary2);
+  transform: scale(1.06);
+}
+.hamburger:active { transform: scale(0.95); }
+/* 3 bars with individual transitions */
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--clr-text);
+  border-radius: 99px;
+  transition: transform 0.38s cubic-bezier(0.68,-0.55,0.265,1.55),
+              opacity 0.2s ease,
+              width 0.25s ease,
+              background 0.2s ease;
+  margin: 3px 0;
+}
+/* Middle bar slightly shorter for style */
+.hamburger span:nth-child(2) { width: 16px; }
+/* When open: X animation */
+.hamburger.open { background: rgba(124,58,237,0.2); border-color: var(--clr-primary2); }
+.hamburger.open span { background: var(--clr-primary2); }
+.hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); width: 22px; }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); width: 22px; }
+
+@media (max-width: 768px) {
+  .hamburger { display: flex !important; }
+}
+
+/* Mobile nav slide-in animation */
+.nav-mobile.open {
+  animation: mobileSlideIn 0.32s cubic-bezier(0.25,0.46,0.45,0.94) forwards !important;
+}
+@keyframes mobileSlideIn {
+  from { opacity: 0; transform: translateY(-14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── FIX 2: Dashboard hamburger logout color fix ── */
+/* The logout link in nav-mobile on dashboard */
+.nav-mobile a.btn-outline {
+  color: #f87171 !important;
+  border-color: rgba(239,68,68,0.4) !important;
+  background: rgba(239,68,68,0.07) !important;
+}
+.nav-mobile a.btn-outline:hover {
+  background: rgba(239,68,68,0.15) !important;
+  color: #fca5a5 !important;
+  border-color: rgba(239,68,68,0.6) !important;
+}
+
+/* ── FIX 1: Hero — content hidden under navbar on mobile ── */
+@media (max-width: 768px) {
+  .hero { height: 100svh; min-height: 580px; }
+  /* The inner containers in each hero slide have inline padding-top:72px
+     — we need hero-content to be vertically centered, not aligned to bottom */
+  .hero-slide {
+    align-items: center !important;
+    padding-bottom: 0 !important;
+  }
+  /* Target the container div inside hero slides that has inline styles */
+  .hero-slide > .container,
+  .hero-slide > div[style*="container"] {
+    padding-top: 80px !important;
+    padding-bottom: 40px !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    height: 100% !important;
+  }
+  .hero-content { max-width: 100%; }
+  .hero-content h1 { font-size: clamp(1.7rem,6vw,2.4rem) !important; margin-bottom: 12px; }
+  .hero-content p { font-size: 0.88rem !important; margin-bottom: 20px; }
+  .hero-meta { font-size: 0.75rem !important; gap: 8px !important; margin-bottom: 14px; }
+  .hero-actions .btn-lg { padding: 12px 24px; font-size: 0.9rem; }
+}
+@media (max-width: 480px) {
+  .hero { min-height: 540px; }
+  .hero-content h1 { font-size: 1.6rem !important; }
+}
+
+/* ── FIX 1: Stats section mobile — prevent breaking ── */
+@media (max-width: 768px) {
+  .stats-strip {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+  }
+  .stat-item { padding: 22px 16px; }
+  .stat-num { font-size: 2.2rem; }
+}
+@media (max-width: 480px) {
+  .stats-strip {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+  .stat-item { padding: 18px 12px; }
+  .stat-num { font-size: 1.8rem; }
+  .stat-label { font-size: 0.75rem; }
+}
+
+/* ── FIX 1: Filter bar mobile — proper alignment ── */
+@media (max-width: 768px) {
+  /* The filter section container uses inline flex – override for mobile */
+  #filterSection .container > div,
+  #filterSection .container > [style] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+  /* Tab buttons: horizontally scrollable pill row */
+  .tabs {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    padding-bottom: 4px !important;
+    gap: 6px !important;
+    margin-bottom: 0 !important;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab-btn { white-space: nowrap; flex-shrink: 0; padding: 8px 16px; font-size: 0.8rem; }
+  /* Selects stack below tabs */
+  .filter-select { width: 100%; }
+}
+@media (max-width: 480px) {
+  .tab-btn { padding: 7px 13px; font-size: 0.78rem; }
+}
+
+/* ── FIX 2: Dashboard mobile — sidebar becomes horizontal scroll nav ── */
+@media (max-width: 900px) {
+  .dashboard-wrapper {
+    grid-template-columns: 1fr !important;
+  }
+  .dash-sidebar {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    padding: 12px 16px !important;
+    gap: 6px !important;
+    border-right: none !important;
+    border-bottom: 2px solid var(--clr-border) !important;
+    background: var(--clr-bg2) !important;
+    align-items: center !important;
+  }
+  .dash-sidebar::-webkit-scrollbar { display: none; }
+  /* Hide user info card and section labels on mobile sidebar */
+  .dash-sidebar .user-info,
+  .dash-sidebar .dash-nav-section { display: none !important; }
+  /* Nav links become pill buttons */
+  .dash-nav-link {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    padding: 8px 14px !important;
+    border-radius: var(--radius-xl) !important;
+    font-size: 0.8rem !important;
+    border: 1px solid transparent !important;
+    background: rgba(255,255,255,0.04) !important;
+    gap: 6px !important;
+    min-width: auto !important;
+  }
+  .dash-nav-link .icon { font-size: 1rem !important; }
+  .dash-nav-link:hover,
+  .dash-nav-link.active {
+    background: rgba(124,58,237,0.18) !important;
+    border-color: var(--clr-primary) !important;
+    color: var(--clr-primary2) !important;
+  }
+  /* Active pill has no border-left accent — remove it */
+  .dash-nav-link.active {
+    border-left: none !important;
+    padding-left: 14px !important;
+  }
+  /* Logout pill — danger color */
+  .dash-nav-link[href="login.html"] {
+    color: #f87171 !important;
+    border-color: rgba(239,68,68,0.3) !important;
+    background: rgba(239,68,68,0.07) !important;
+  }
+  .dash-nav-link[href="login.html"]:hover {
+    background: rgba(239,68,68,0.15) !important;
+    border-color: rgba(239,68,68,0.5) !important;
+  }
+  .dash-content { padding: 20px 16px !important; }
+}
+
+@media (max-width: 480px) {
+  .dash-stats { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  .dash-stat { padding: 16px 12px !important; }
+  .dash-stat-num { font-size: 1.5rem !important; }
+  .dash-stat-icon { font-size: 1.3rem !important; margin-bottom: 8px !important; }
+  /* Profile form — stack 2-col grid */
+  #profileForm > div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── FIX 1: CTA band mobile ── */
+@media (max-width: 640px) {
+  #ctaBand .container > div:last-child { width: 100%; }
+  #ctaBand .container > div:last-child > a { width: 100%; justify-content: center; }
+}
+
+/* General overflow guard */
+.section, .section-sm { overflow-x: hidden; }
+
+/* ── CINEMATIC PRELOADER base ── */
+.page-loader {
+  position: fixed; inset: 0; background: #07070e; z-index: 99999;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   STACKLY v5 PATCH — Dashboard overflow, Filter bars,
+   Full mobile responsiveness for all pages
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── GLOBAL: prevent any horizontal overflow ── */
+html, body { overflow-x: hidden; max-width: 100%; }
+*, *::before, *::after { box-sizing: border-box; }
+.container { width: 92%; max-width: 1280px; margin: 0 auto; overflow: visible; }
+
+/* ══════════════════════════════════════════════════════════
+   FIX 1: DASHBOARD — watchlist overflow + welcome area
+   ══════════════════════════════════════════════════════════ */
+
+/* Dash content must not overflow its column */
+.dash-content {
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+/* Welcome header (dash-header) — stack vertically on small screens */
+@media (max-width: 768px) {
+  .dash-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .dash-header h2 { font-size: 1.5rem; }
+  .dash-header p  { font-size: 0.85rem; }
+}
+@media (max-width: 480px) {
+  .dash-header h2 { font-size: 1.3rem; }
+}
+
+/* Watchlist content-grid — never overflow dash-content */
+#watchlist .content-grid {
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+}
+@media (max-width: 900px) {
+  #watchlist .content-grid { grid-template-columns: repeat(3, 1fr) !important; }
+}
+@media (max-width: 700px) {
+  #watchlist .content-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+}
+@media (max-width: 400px) {
+  #watchlist .content-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
+}
+
+/* Downloads content-grid */
+#downloads .content-grid {
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 14px; width: 100%; min-width: 0;
+}
+@media (max-width: 700px) {
+  #downloads .content-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+}
+
+/* Subscription plans inside dashboard */
+@media (max-width: 900px) {
+  .dash-content .plans-grid {
+    grid-template-columns: 1fr !important;
+    max-width: 400px;
+  }
+}
+@media (max-width: 600px) {
+  .dash-content .plans-grid { max-width: 100% !important; }
+}
+
+/* Profile form 2-col grid → 1-col on mobile */
+@media (max-width: 640px) {
+  #profileForm > div[style*="grid-template-columns"] {
+    display: block !important;
+  }
+  #profileForm > div[style*="grid-template-columns"] .form-group {
+    margin-bottom: 16px;
+  }
+}
+
+/* Settings rows — wrap label+select vertically on small screens */
+@media (max-width: 600px) {
+  .setting-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 0;
+  }
+  .setting-row .filter-select { width: 100%; }
+}
+
+/* Dashboard scroll-row cards */
+@media (max-width: 500px) {
+  .dash-content .scroll-row .content-card { flex: 0 0 130px; }
+}
+
+/* Watch history on mobile — keep grid layout clean */
+@media (max-width: 600px) {
+  .watch-history {
+    grid-template-columns: 1fr !important;
+    gap: 12px;
+  }
+  .history-card {
+    display: grid !important;
+    grid-template-columns: 120px 1fr !important;
+    gap: 12px;
+    align-items: center;
+    padding: 10px;
+  }
+  .history-thumb {
+    height: 72px !important;
+    aspect-ratio: unset !important;
+    border-radius: 8px;
+  }
+}
+
+/* Dash stat cards on mobile */
+@media (max-width: 600px) {
+  .dash-stats { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  .dash-stat  { padding: 16px 12px !important; }
+  .dash-stat-num { font-size: 1.4rem !important; }
+}
+@media (max-width: 380px) {
+  .dash-stats { grid-template-columns: 1fr 1fr !important; }
+}
+
+/* Current plan box — wrap flex on mobile */
+@media (max-width: 600px) {
+  .current-plan > div:first-child { flex-direction: column; align-items: flex-start; }
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   FIX 3: FILTER BARS — movies.html & series.html
+   The filter wrapper is an inline-styled flex div.
+   We need to restructure its layout on mobile.
+   ══════════════════════════════════════════════════════════ */
+
+/* Target both filter sections: movies has id="filterSection", series has no id */
+#filterSection .container > div,
+.container > div[style*="display:flex"][style*="align-items:center"][style*="gap:12px"][style*="flex-wrap:wrap"] {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  align-items: flex-start !important;
+}
+
+@media (max-width: 768px) {
+  /* Make tabs row scrollable horizontally — sits on its own line */
+  #filterSection .container > div,
+  .container > div[style*="display:flex"][style*="align-items:center"][style*="gap:12px"][style*="flex-wrap:wrap"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+
+  /* Tabs: horizontal scroll pill bar */
+  #filterSection .tabs,
+  .tabs[style*="flex:1"] {
+    flex: unset !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 6px !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 2px !important;
+  }
+  #filterSection .tabs::-webkit-scrollbar,
+  .tabs[style*="flex:1"]::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    padding: 8px 14px !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* Selects row — both selects side by side */
+  #filterSection .container > div > select,
+  .container > div[style*="display:flex"][style*="align-items:center"][style*="gap:12px"] > select {
+    flex: 1 1 calc(50% - 5px) !important;
+    min-width: 0 !important;
+    width: calc(50% - 5px) !important;
+    max-width: none !important;
+  }
+
+  /* Wrap selects in a row by grouping them — 
+     since we can't add HTML, use grid auto placement */
+  /* Actually target both selects to appear in a row using flex order */
+  .filter-select {
+    flex: 1 1 calc(50% - 5px);
+    min-width: 100px;
+  }
+}
+@media (max-width: 400px) {
+  .tab-btn { padding: 7px 11px !important; font-size: 0.75rem !important; }
+  .filter-select { flex: 1 1 100% !important; }
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   FIX 4: FULL MOBILE RESPONSIVENESS — ALL PAGES
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Navbar ── */
+@media (max-width: 768px) {
+  .navbar { padding: 0 4%; height: 64px; }
+  .nav-tagline { display: none; }
+}
+
+/* ── Page hero (movies/series/about/contact banner) ── */
+@media (max-width: 768px) {
+  .page-hero {
+    padding-top: calc(64px + 40px) !important;
+    padding-bottom: 48px !important;
+    min-height: auto;
+  }
+  .page-hero h1 { font-size: clamp(1.8rem,7vw,2.6rem) !important; }
+  .page-hero p  { font-size: 0.88rem; }
+  /* Stats row inside page-hero — stack 2 cols */
+  .page-hero div[style*="grid-template-columns:repeat(4"] {
+    grid-template-columns: repeat(2, auto) !important;
+    gap: 20px 28px !important;
+  }
+  /* Badge row */
+  .page-hero div[style*="display:flex"][style*="gap:12px"] { flex-wrap: wrap; }
+}
+@media (max-width: 480px) {
+  .page-hero { padding-top: calc(64px + 28px) !important; padding-bottom: 36px !important; }
+  .page-hero h1 { font-size: 1.7rem !important; }
+  .page-hero div[style*="grid-template-columns:repeat(4"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+  }
+}
+
+/* ── Content grid — all pages ── */
+@media (max-width: 900px) {
+  .content-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 14px; }
+}
+@media (max-width: 600px) {
+  .content-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+}
+@media (max-width: 360px) {
+  .content-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
+}
+
+/* ── Categories grid ── */
+@media (max-width: 600px) {
+  .categories-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px; }
+  .category-card { min-height: 110px; padding: 20px 14px; }
+  .category-icon { font-size: 1.8rem; margin-bottom: 8px; }
+}
+@media (max-width: 380px) {
+  .categories-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* ── Testimonials ── */
+@media (max-width: 768px) {
+  .testimonials-grid { grid-template-columns: 1fr !important; gap: 16px; }
+  .testimonial-card { padding: 20px; }
+}
+
+/* ── Plans grid ── */
+@media (max-width: 900px) {
+  .plans-grid { grid-template-columns: 1fr !important; max-width: 420px; margin: 0 auto; }
+}
+@media (max-width: 480px) {
+  .plans-grid { max-width: 100%; }
+  .plan-card { padding: 28px 20px; }
+  .plan-price { font-size: 2.6rem; }
+}
+
+/* ── Stats strip (home page) ── */
+@media (max-width: 768px) {
+  .stats-strip { grid-template-columns: repeat(2, 1fr) !important; gap: 12px; }
+  .stat-item { padding: 20px 14px; }
+  .stat-num { font-size: 2rem; }
+}
+@media (max-width: 400px) {
+  .stat-item { padding: 16px 10px; }
+  .stat-num { font-size: 1.7rem; }
+  .stat-label { font-size: 0.73rem; }
+}
+
+/* ── Featured banner ── */
+@media (max-width: 600px) {
+  .featured-banner { padding: 24px 18px; min-height: 220px; }
+  .featured-banner h3 { font-size: 1.4rem; }
+  .featured-banner p { font-size: 0.85rem; }
+}
+
+/* ── Scroll row cards ── */
+@media (max-width: 600px) {
+  .scroll-row .content-card { flex: 0 0 140px; }
+}
+@media (max-width: 400px) {
+  .scroll-row .content-card { flex: 0 0 120px; }
+}
+
+/* ── Footer ── */
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr !important; gap: 28px; }
+  footer { padding: 48px 0 24px; }
+}
+@media (max-width: 480px) {
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .footer-links { gap: 12px; }
+}
+
+/* ── Newsletter ── */
+@media (max-width: 768px) {
+  .newsletter { padding: 40px 20px; }
+  .newsletter-form { flex-direction: column; gap: 10px; }
+  .newsletter-form input { border-radius: var(--radius-xl); }
+}
+
+/* ── CTA band ── */
+@media (max-width: 640px) {
+  #ctaBand .container {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 16px !important;
+  }
+  #ctaBand .container > div:last-child { display: flex; flex-direction: column; gap: 10px; }
+  #ctaBand .container > div:last-child .btn { width: 100%; justify-content: center; }
+}
+
+/* ── Section headings on mobile ── */
+@media (max-width: 600px) {
+  .section { padding: 48px 0; }
+  .section-sm { padding: 36px 0; }
+  .section-header { margin-bottom: 28px; }
+  .section-header h2 { font-size: 1.5rem; }
+  .content-row-header h3 { font-size: 1rem; }
+}
+
+/* ── FAQ ── */
+@media (max-width: 600px) {
+  .faq-q { padding: 16px 18px; font-size: 0.9rem; }
+  .faq-a p { padding: 0 18px 16px; font-size: 0.85rem; }
+}
+
+/* ── Contact page ── */
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr !important; gap: 28px; }
+  .contact-form { padding: 22px 16px; }
+}
+
+/* ── About page ── */
+@media (max-width: 768px) {
+  .values-grid { grid-template-columns: 1fr !important; gap: 14px; }
+  .milestone-item { gap: 14px; }
+}
+@media (max-width: 600px) {
+  .team-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+}
+
+/* ── Hero section ── */
+@media (max-width: 768px) {
+  .hero { height: 100svh; min-height: 540px; }
+  .hero-slide { padding-bottom: 6vh; }
+  .hero-content h1 { font-size: clamp(1.6rem,6vw,2.2rem) !important; }
+  .hero-content p  { font-size: 0.86rem !important; margin-bottom: 18px; }
+  .hero-meta span  { font-size: 0.74rem !important; }
+  .hero-actions .btn { padding: 10px 20px; font-size: 0.88rem; }
+  .hero-dots { bottom: 20px; }
+}
+@media (max-width: 400px) {
+  .hero-content h1 { font-size: 1.5rem !important; }
+  .hero-actions { gap: 8px; }
+}
+
+/* ── Back to top ── */
+@media (max-width: 600px) {
+  .back-to-top { bottom: 16px; right: 14px; width: 38px; height: 38px; font-size: 0.95rem; }
+}
+
+/* ── 404 page ── */
+@media (max-width: 600px) {
+  .error-code { font-size: 5rem; }
+  .error-title { font-size: 1.4rem; }
+}
+
+/* ── Login / Signup pages ── */
+@media (max-width: 800px) {
+  .auth-root { grid-template-columns: 1fr !important; }
+  .auth-visual { display: none !important; }
+  .auth-form-side { padding: 32px 24px; }
+}
+@media (max-width: 420px) {
+  .auth-form-side { padding: 28px 16px; }
+  .social-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+}
+
+/* ── Ticker ── */
+@media (max-width: 480px) {
+  .ticker-track span { font-size: 0.7rem; letter-spacing: 0.06em; }
+  .ticker-track { gap: 30px; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   STACKLY v6 — Fix hamburger full-cover + smooth mobile
+   ═══════════════════════════════════════════════════════════ */
+
+/* ────────────────────────────────────────────────────────
+   FIX 1: HAMBURGER MENU — full screen cover
+   The nav-mobile has top:72px fixed in base CSS.
+   On mobile the navbar shrinks to 64px, leaving an 8px gap.
+   We sync top to 64px and ensure it covers full remaining screen.
+   ──────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Navbar is 64px tall on mobile — sync nav-mobile top */
+  .nav-mobile {
+    top: 64px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    min-height: calc(100dvh - 64px) !important;
+    position: fixed !important;
+    z-index: 999 !important;
+    background: #0a0a0f !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    /* Smooth slide-down open animation */
+    transform-origin: top center;
+  }
+  /* Ensure body lock works by setting margin to 0 */
+  body.nav-open {
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100% !important;
+  }
+  /* Links fill the full width, proper tap targets */
+  .nav-mobile a {
+    display: block !important;
+    width: 100% !important;
+    padding: 18px 24px !important;
+    font-size: 1.05rem !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+  }
+  .nav-mobile a:last-child { border-bottom: none !important; }
+  .nav-mobile .btn {
+    margin: 16px 24px !important;
+    width: calc(100% - 48px) !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+  /* Slide-down animation */
+  .nav-mobile.open {
+    display: flex !important;
+    flex-direction: column !important;
+    animation: navFullOpen 0.28s cubic-bezier(0.25,0.46,0.45,0.94) forwards !important;
+  }
+  @keyframes navFullOpen {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* On very small screens (iPhone SE etc.) */
+@media (max-width: 375px) {
+  .nav-mobile { top: 64px !important; }
+  .nav-mobile a { padding: 16px 20px !important; font-size: 1rem !important; }
+}
+
+/* ────────────────────────────────────────────────────────
+   FIX 3: SMOOTHER MOBILE RESPONSIVENESS
+   Improve transitions, spacing, touch targets, layout
+   ──────────────────────────────────────────────────────── */
+
+/* Global smooth transition for interactive elements */
+@media (max-width: 768px) {
+  * { -webkit-tap-highlight-color: rgba(124,58,237,0.15); }
+
+  /* Smoother scroll behaviour */
+  html { scroll-behavior: smooth; }
+
+  /* Buttons — bigger touch targets */
+  .btn { min-height: 44px; }
+  .btn-sm { min-height: 38px; padding: 8px 18px !important; }
+
+  /* Tab buttons — bigger touch target */
+  .tab-btn { min-height: 38px; }
+
+  /* Dash nav links — bigger tap area */
+  .dash-nav-link { min-height: 40px; }
+
+  /* Input fields — bigger tap area, no zoom on focus */
+  input, select, textarea {
+    font-size: 16px !important; /* prevents iOS zoom on focus */
+  }
+  .form-control { font-size: 16px !important; }
+  .field input  { font-size: 16px !important; }
+
+  /* Smoother card transitions on mobile */
+  .content-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  /* Disable hover scale effects on touch — they linger on mobile */
+  .content-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  /* Tap feedback instead */
+  .content-card:active {
+    transform: scale(0.97) !important;
+    transition: transform 0.1s ease !important;
+  }
+  /* Content card overlay — always slightly visible on mobile */
+  .content-card .overlay {
+    opacity: 0.92 !important;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 60%, transparent 100%) !important;
+  }
+
+  /* Plan card — no hover lift on mobile */
+  .plan-card:hover { transform: none !important; }
+  .plan-card:active { transform: scale(0.98) !important; }
+
+  /* Category card — tap feedback */
+  .category-card:hover { transform: none !important; box-shadow: none !important; }
+  .category-card:active { transform: scale(0.97) !important; }
+
+  /* FAQ smooth open */
+  .faq-a {
+    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1),
+                padding 0.25s ease !important;
+  }
+
+  /* Section padding — more breathing room */
+  .container { width: 94% !important; }
+
+  /* Improved scroll row on touch */
+  .scroll-row {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    gap: 12px !important;
+  }
+  .scroll-row .content-card {
+    scroll-snap-align: start;
+    flex: 0 0 150px !important;
+  }
+
+  /* Smoother hero transition */
+  .hero-slide { transition: opacity 0.7s ease !important; }
+
+  /* Ticker — smooth on mobile */
+  .ticker { overflow: hidden; }
+  .ticker-track {
+    animation-duration: 20s !important; /* faster = smoother on mobile */
+  }
+
+  /* Back-to-top — larger tap target */
+  .back-to-top { min-width: 44px; min-height: 44px; }
+
+  /* Toast — full width at bottom on mobile */
+  .toast-container {
+    left: 12px !important;
+    right: 12px !important;
+    bottom: 16px !important;
+  }
+  .toast { min-width: 0 !important; width: 100% !important; }
+
+  /* Smooth AOS on mobile — shorter duration */
+  [data-aos] {
+    transition-duration: 500ms !important;
+    transition-timing-function: cubic-bezier(0.25,0.46,0.45,0.94) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container { width: 95% !important; }
+
+  /* Smoother hero on small phones */
+  .hero { min-height: 520px !important; }
+  .hero-content { padding: 0 4px; }
+
+  /* Cards overlay always on for small screens */
+  .content-card .overlay { opacity: 1 !important; }
+
+  /* Newsletter form — stack */
+  .newsletter-form {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  .newsletter-form input,
+  .newsletter-form .btn {
+    width: 100% !important;
+    justify-content: center;
+  }
+}
+
+/* Restore hover effects on devices that support hover (non-touch) */
+@media (hover: hover) and (pointer: fine) {
+  .content-card:hover {
+    transform: translateY(-6px) scale(1.03) !important;
+    box-shadow: 0 16px 36px rgba(0,0,0,0.5) !important;
+  }
+  .content-card .overlay { opacity: 0 !important; }
+  .content-card:hover .overlay { opacity: 1 !important; }
+  .plan-card:hover { transform: translateY(-8px) !important; }
+  .category-card:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: var(--shadow-glow) !important;
+  }
+}

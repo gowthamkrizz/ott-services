@@ -10,26 +10,113 @@
 </head>
 <body>
 
-<!-- PAGE LOADER -->
+<!-- CINEMATIC PRELOADER -->
 <div class="page-loader" id="pageLoader">
-  <div class="loader-logo">
-    <span class="logo-btn"><img src="assets/img/stackly_logo.webp" class="logo-img" alt="Logo"></span>
+  <!-- Letterbox bars top/bottom -->
+  <div id="loaderLetterTop" style="position:absolute;top:0;left:0;right:0;height:0;background:#000;z-index:5;transition:height 0.5s ease;"></div>
+  <div id="loaderLetterBot" style="position:absolute;bottom:0;left:0;right:0;height:0;background:#000;z-index:5;transition:height 0.5s ease;"></div>
+  <!-- Left curtain -->
+  <div id="loaderCurtainL" style="position:absolute;top:0;bottom:0;left:0;width:51%;background:#080810;z-index:4;transition:transform 1s cubic-bezier(0.86,0,0.07,1);transform:translateX(0);"></div>
+  <!-- Right curtain -->
+  <div id="loaderCurtainR" style="position:absolute;top:0;bottom:0;right:0;width:51%;background:#080810;z-index:4;transition:transform 1s cubic-bezier(0.86,0,0.07,1);transform:translateX(0);"></div>
+  <!-- Scanlines -->
+  <div style="position:absolute;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,0.012) 3px,rgba(255,255,255,0.012) 4px);"></div>
+  <!-- Grain -->
+  <div style="position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0.04;background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%224%22 stitchTiles=%22stitch%22/></filter><rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/></svg>');background-size:160px;"></div>
+  <!-- Center content -->
+  <div id="loaderCenter" style="position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;gap:16px;opacity:0;transition:opacity 0.7s ease 0.5s;">
+    <!-- Spinning ring + logo -->
+    <div style="position:relative;width:180px;height:180px;display:flex;align-items:center;justify-content:center;">
+      <div id="loaderRing" style="position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(124,58,237,0.4);animation:loaderSpin 3.5s linear infinite;"></div>
+      <div style="position:absolute;inset:12px;border-radius:50%;border:1px solid rgba(6,182,212,0.2);animation:loaderSpin 5s linear infinite reverse;"></div>
+      <img src="assets/img/stackly_logo.webp" alt="Stackly" style="width:100px;height:100px;object-fit:contain;filter:drop-shadow(0 0 32px rgba(124,58,237,0.9)) drop-shadow(0 0 64px rgba(168,85,247,0.5));animation:loaderLogoPulse 2.2s ease-in-out infinite;">
+    </div>
+    <!-- Brand name letter-spacing reveal -->
+    <div id="loaderTitle" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,10vw,5.5rem);letter-spacing:0.5em;color:#fff;text-shadow:0 0 40px rgba(124,58,237,0.7);opacity:0;transition:opacity 0.6s ease,letter-spacing 0.8s ease;padding-right:0.5em;">STACKLY</div>
+    <div style="font-size:0.7rem;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.35);opacity:0;transition:opacity 0.5s ease 1.2s;" id="loaderTagline">Stream Everything &nbsp;&bull;&nbsp; Anywhere &nbsp;&bull;&nbsp; Anytime</div>
   </div>
-  <div class="loader-bar"><div class="loader-fill"></div></div>
-  <p style="color:var(--clr-text-muted);margin-top:8px;">Loading your entertainment...</p>
+  <!-- Bottom timeline -->
+  <div id="loaderTimeline" style="position:absolute;bottom:10vh;left:0;right:0;z-index:3;display:flex;align-items:center;gap:14px;padding:0 8%;opacity:0;transition:opacity 0.5s ease 0.6s;">
+    <span id="loaderFrame" style="font-size:0.68rem;color:rgba(255,255,255,0.25);letter-spacing:0.05em;min-width:28px;text-align:center;font-variant-numeric:tabular-nums;">00</span>
+    <div style="flex:1;height:1.5px;background:rgba(255,255,255,0.08);border-radius:99px;overflow:hidden;">
+      <div id="loaderProgressBar" style="height:100%;width:0;background:linear-gradient(90deg,var(--clr-primary),var(--clr-accent));border-radius:99px;transition:width 5.5s cubic-bezier(0.4,0,0.2,1);"></div>
+    </div>
+    <span style="font-size:0.68rem;color:rgba(255,255,255,0.25);letter-spacing:0.05em;">50</span>
+  </div>
 </div>
+<style>
+@keyframes loaderSpin { to { transform: rotate(360deg); } }
+@keyframes loaderLogoPulse {
+  0%,100% { filter: drop-shadow(0 0 28px rgba(124,58,237,0.8)) drop-shadow(0 0 56px rgba(168,85,247,0.4)); }
+  50%      { filter: drop-shadow(0 0 48px rgba(168,85,247,1)) drop-shadow(0 0 90px rgba(6,182,212,0.5)); }
+}
+</style>
 <script id="pageLoaderScript">
-  window.addEventListener("load", function() {
-    var loader = document.getElementById("pageLoader");
-    if (loader) {
-      setTimeout(function() {
-        loader.style.transition = "opacity 0.6s ease";
-        loader.style.opacity = "0";
-        loader.style.pointerEvents = "none";
-        setTimeout(function(){ loader.remove(); }, 600);
-      }, 2500);
-    }
+(function(){
+  var loader = document.getElementById('pageLoader');
+  if(!loader) return;
+
+  var cL  = document.getElementById('loaderCurtainL');
+  var cR  = document.getElementById('loaderCurtainR');
+  var lT  = document.getElementById('loaderLetterTop');
+  var lB  = document.getElementById('loaderLetterBot');
+  var cnt = document.getElementById('loaderCenter');
+  var tl  = document.getElementById('loaderTimeline');
+  var bar = document.getElementById('loaderProgressBar');
+  var frm = document.getElementById('loaderFrame');
+  var ttl = document.getElementById('loaderTitle');
+  var tag = document.getElementById('loaderTagline');
+
+  /* Step 1: letterbox bars appear immediately */
+  requestAnimationFrame(function(){
+    lT.style.height = '9vh';
+    lB.style.height = '9vh';
   });
+
+  /* Step 2: show center content + timeline */
+  setTimeout(function(){
+    cnt.style.opacity = '1';
+    tl.style.opacity  = '1';
+    /* title letter-spacing collapse */
+    setTimeout(function(){
+      ttl.style.opacity = '1';
+      ttl.style.letterSpacing = '0.15em';
+    }, 100);
+    /* tagline fade */
+    setTimeout(function(){ tag.style.opacity = '1'; }, 500);
+    /* progress bar fill */
+    setTimeout(function(){ bar.style.width = '100%'; }, 200);
+    /* frame counter */
+    var f = 0;
+    var ticker = setInterval(function(){
+      f++;
+      if(frm) frm.textContent = f < 10 ? '0'+f : f;
+      if(f >= 50) clearInterval(ticker);
+    }, 100);
+  }, 300);
+
+  /* Step 3: curtains open after 1.1s */
+  setTimeout(function(){
+    cL.style.transform = 'translateX(-104%)';
+    cR.style.transform = 'translateX(104%)';
+  }, 1500);
+
+  /* Step 4: exit on load (min 2.8s) */
+  function exitLoader(){
+    lT.style.height = '0';
+    lB.style.height = '0';
+    loader.style.transition = 'opacity 0.65s ease';
+    loader.style.opacity    = '0';
+    loader.style.pointerEvents = 'none';
+    setTimeout(function(){ if(loader.parentNode) loader.parentNode.removeChild(loader); }, 700);
+  }
+  var minTime = Date.now();
+  window.addEventListener('load', function(){
+    var elapsed = Date.now() - minTime;
+    var delay   = Math.max(6000 - elapsed, 400);
+    setTimeout(exitLoader, delay);
+  });
+})();
 </script>
 
 <!-- NAVBAR -->
